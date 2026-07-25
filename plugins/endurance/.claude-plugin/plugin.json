@@ -1,0 +1,13 @@
+{
+  "name": "endurance",
+  "version": "1.0.0",
+  "description": "Trail running, skiing and biathlon analytics: your training history, endurance curves, race courses and GPX terrain analysis.",
+  "author": {
+    "name": "Endurance Analytics",
+    "url": "https://endurance-analytics.com"
+  },
+  "homepage": "https://endurance-analytics.com/en/connect",
+  "repository": "https://github.com/IgorAleksandroff/endurance-analytics-plugin",
+  "license": "MIT",
+  "keywords": ["running", "trail-running", "training", "gpx", "analytics", "strava"]
+}

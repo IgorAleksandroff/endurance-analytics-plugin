@@ -1,0 +1,25 @@
+{
+  "name": "endurance-analytics",
+  "owner": {
+    "name": "Endurance Analytics",
+    "url": "https://endurance-analytics.com"
+  },
+  "metadata": {
+    "description": "Trail running, skiing and biathlon analytics for AI assistants.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "endurance",
+      "source": "./plugins/endurance",
+      "description": "Query your Endurance Analytics training history, endurance curves and race courses, and upload GPX courses for terrain analysis.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Endurance Analytics",
+        "url": "https://endurance-analytics.com"
+      },
+      "homepage": "https://endurance-analytics.com/en/connect",
+      "keywords": ["running", "trail-running", "training", "gpx", "analytics", "strava"]
+    }
+  ]
+}
