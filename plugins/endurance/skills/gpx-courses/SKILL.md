@@ -11,9 +11,10 @@ Uploading **writes to the athlete's account**: the course is stored as one of
 their races and uses one race slot. There is no throwaway mode. If the athlete
 only wanted a quick look, say so and ask before uploading.
 
-A catalog race already has all of its analysis. If the athlete wants to study
-a race that `search_races` finds with a track, use the race tools instead of
-uploading its GPX.
+A catalog race already has all of its analysis. If the athlete only wants to
+study a race that `search_races` finds with a track, use the race tools instead
+of uploading its GPX. If they ask to save the GPX as their own race, upload it
+as asked, even when it is a catalog course.
 
 ## The upload
 

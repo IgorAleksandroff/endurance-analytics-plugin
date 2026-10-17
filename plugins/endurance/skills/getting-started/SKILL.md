@@ -15,8 +15,8 @@ already named a race or a course, skip the tour and help with that.
 
 ## First steps
 
-1. Call `get_my_profile` to confirm the connection and greet the athlete by
-   name. A new account has no races and no performance index yet; say so as a
+1. Call `get_my_profile` to confirm the connection. It carries no name, so do
+   not ask for or guess one. A new account has no races and no performance index yet; say so as a
    fact, not as an error. Present distances and elevations in the athlete's
    `preferred_units`.
 2. Offer the three things most people start with, as example prompts:
