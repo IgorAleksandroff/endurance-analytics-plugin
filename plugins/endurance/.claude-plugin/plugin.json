@@ -1,7 +1,7 @@
 {
   "name": "endurance",
-  "version": "1.0.0",
-  "description": "Trail running, skiing and biathlon analytics: your training history, endurance curves, race courses and GPX terrain analysis.",
+  "version": "1.1.0",
+  "description": "Trail race analytics: race catalog, course terrain, pole advice, quad damage, race-day weather and results, your stored races, and GPX course upload with terrain analysis.",
   "author": {
     "name": "Endurance Analytics",
     "url": "https://endurance-analytics.com"
@@ -9,5 +9,5 @@
   "homepage": "https://endurance-analytics.com/en/connect",
   "repository": "https://github.com/IgorAleksandroff/endurance-analytics-plugin",
   "license": "MIT",
-  "keywords": ["running", "trail-running", "training", "gpx", "analytics", "strava"]
+  "keywords": ["running", "trail-running", "ultra", "race", "gpx", "terrain", "weather", "analytics"]
 }

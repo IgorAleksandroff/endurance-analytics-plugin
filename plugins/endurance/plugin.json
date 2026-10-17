@@ -1,0 +1,95 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "endurance-analytics",
+  "version": "1.1.0",
+  "description": "Trail race analytics from Endurance Analytics: search the race catalog, read course terrain (climbs, descents, technicality), pole advice, quad damage from descents, race-day weather at the course and results, plus your own stored races and GPX course upload with terrain analysis.",
+  "author": {
+    "name": "Endurance Analytics",
+    "url": "https://endurance-analytics.com"
+  },
+  "homepage": "https://endurance-analytics.com/en/connect",
+  "repository": "https://github.com/IgorAleksandroff/endurance-analytics-plugin",
+  "license": "MIT",
+  "keywords": ["trail-running", "ultra", "race", "gpx", "terrain", "weather", "analytics"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Endurance Analytics",
+        "shortDescription": "Trail race terrain & insights",
+        "longDescription": "Endurance Analytics turns trail race courses into race-day decisions. Ask about any race in the public catalog and get what the platform computed from its course track: flat-equivalent distance, the steepness profile, the longest and steepest climbs and descents with where they fall, surface and technical sections matched against OpenStreetMap, where running poles pay off, how much quad damage the descents inflict and where, and the weather at the course itself: the climate record of the race date, the forecast when the race is close, and what the weather did in past editions. Results of completed races are available for context.\n\nConnect your Endurance Analytics account to read your profile, performance index, stored races and race wishlist, and to upload a GPX course (by link or file) as one of your races for the same terrain analysis.\n\nBuilt for trail and ultra runners preparing for a race, choosing between races, or checking a course they found online.\n\nLimitations: training data, endurance curves, heart-rate zones and readiness are not available through this integration. Deleting or editing races, account settings and payments happen on the website; the assistant gives you a link. Uploading a GPX course uses one of your race slots. Course insights are computed for a reference runner, not personal predictions, and the assistant reports only numbers the platform returns. An Endurance Analytics account is required.",
+        "developerName": "Endurance Analytics",
+        "category": "Data & Analytics",
+        "websiteURL": "https://endurance-analytics.com",
+        "supportURL": "https://endurance-analytics.com/en/contact",
+        "privacyPolicyURL": "https://endurance-analytics.com/en/privacy",
+        "termsOfServiceURL": "https://endurance-analytics.com/en/terms",
+        "defaultPrompt": [
+          "Help me prepare for the CCC: key climbs, descents, poles and race-day weather.",
+          "Find trail races in Italy next summer that have a course track.",
+          "Which UTMB Mont-Blanc 2026 race has the most quad-damaging descents?"
+        ],
+        "brandColor": "#0068B2",
+        "brandColorDark": "#0086E6",
+        "logo": "./assets/logo.png",
+        "composerIcon": "./assets/logo.png"
+      },
+      "onboardingSkill": "./skills/getting-started/SKILL.md",
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Find races in the catalog by event name.",
+              "prompt": "Which races are part of HOKA UTMB Mont-Blanc 2026? Give the distance and elevation gain of each.",
+              "tools_triggered": "search_races",
+              "expected_behavior": "Lists the 2026 races of the event (UTMB about 174 km / 9700 m, CCC about 108 km / 6200 m, OCC about 60 km / 3500 m, plus TDS, MCC, YCC and ETC) with distance and gain exactly as the catalog returns them. No invented values; missing fields are reported as unknown."
+            },
+            {
+              "description": "Explain course terrain and the descents that cost the most for a real race.",
+              "prompt": "How hard is the OCC 2026 course? Where are the biggest climbs, and which descents will hurt my quads most?",
+              "tools_triggered": "search_races, get_race_terrain_summary, get_race_quad_damage",
+              "expected_behavior": "Describes the point-to-point course of about 59.5 km and 3400 m of climbing with its highest point near km 34, names the longest climb (about 4.8 km at about 15% ending near km 17) and the steepest sections with their kilometre positions, then reports the quad-damage level (moderate at the time of writing) and the critical descents in course order with their kilometres. States that the damage figures are for a typical runner, not a personal prediction."
+            },
+            {
+              "description": "Advise on running poles for a long mountain race.",
+              "prompt": "Should I carry poles at the CCC 2026, and where on the course should I use them?",
+              "tools_triggered": "search_races, get_race_pole_advice",
+              "expected_behavior": "Gives the platform's verdict (high at the time of writing) and walks the pole plan in course order: where poles come out and go away, with kilometre and elevation for each stint, and where braking with poles is recommended. Explains that the verdict comes from course geometry and is the same for every runner."
+            },
+            {
+              "description": "Report race-day weather at the course.",
+              "prompt": "What weather should I expect at the CCC (UTMB Mont-Blanc)? What should I pack?",
+              "tools_triggered": "search_races, get_race_weather",
+              "expected_behavior": "Reports the climate record of the race date at the course: typical start and summit temperatures with their p10 to p90 spread, rain probability, wind and UV, and time spent in the dark, plus what the weather actually did for an edition that already happened (or the forecast when the race is within about ten days). Turns the spread and the dark time into concrete kit advice such as rain gear and a head torch, without quoting a regional town forecast."
+            },
+            {
+              "description": "Upload a GPX course by link and analyse its terrain.",
+              "prompt": "Save this GPX as my race named 'OCC recon' and tell me how hard it is: https://api.endurance-analytics.com/public/trail/races/utmb-occ/track.gpx?season=2026",
+              "tools_triggered": "save_gpx_as_race",
+              "expected_behavior": "Creates one race in the account and reports its terrain from the tool response: about 59.5 km with about 3400 m of climbing, flat-equivalent distance, and the longest and steepest climbs with their positions. Mentions that the upload used one race slot, that technicality was set to the default of 1 rather than measured, that surface data may still be pending, and that deleting the race is done on the website."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Training and heart-rate data are not available through this integration. The assistant must not call tools to approximate them; it explains they are not available here and points the athlete to the Endurance Analytics website.",
+              "prompt": "Show my Strava trainings from last week and my heart-rate zones."
+            },
+            {
+              "description": "Deleting a race is website-only by design. The assistant must not attempt any write or destructive action; it may look the race up and gives the web link where the athlete can delete it.",
+              "prompt": "Delete my race 'OCC recon' from Endurance Analytics."
+            },
+            {
+              "description": "The request is unrelated to race analytics. The plugin should not be used and no Endurance Analytics tool should be called.",
+              "prompt": "Book me a hotel in Chamonix for the last week of August."
+            }
+          ]
+        },
+        "demo_recording_url": "https://example.invalid/TODO-demo",
+        "commerce": false
+      },
+      "publication": {
+        "countries": [],
+        "release_notes": "Initial ChatGPT release: race catalog, terrain and race-day insights, personal races and GPX upload."
+      }
+    }
+  }
+}

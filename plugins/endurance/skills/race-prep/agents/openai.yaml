@@ -1,0 +1,4 @@
+interface:
+  display_name: "Race prep"
+  short_description: "Race-day plan from course data"
+  default_prompt: "Help me prepare for the CCC: key climbs, descents, poles and weather."

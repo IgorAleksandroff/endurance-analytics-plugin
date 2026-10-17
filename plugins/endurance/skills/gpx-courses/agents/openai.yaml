@@ -1,0 +1,4 @@
+interface:
+  display_name: "GPX courses"
+  short_description: "Upload and analyse a GPX course"
+  default_prompt: "Save this GPX as my race and tell me how hard it is."

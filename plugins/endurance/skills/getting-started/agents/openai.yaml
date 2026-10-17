@@ -1,0 +1,4 @@
+interface:
+  display_name: "Getting started"
+  short_description: "Tour of Endurance Analytics"
+  default_prompt: "What can Endurance Analytics do for my next race?"
