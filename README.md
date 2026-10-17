@@ -99,6 +99,28 @@ Bump the version in `plugins/endurance/plugin.json`,
 `plugins/endurance/.claude-plugin/plugin.json` and
 `.claude-plugin/marketplace.json` together; the validator checks they match.
 
+## Keeping the plugin in sync with the server
+
+The MCP server lives in the backend (`internal/mcpserver`). Whenever a tool is
+added, removed or renamed, or its inputs, outputs, annotations or limits change,
+update this repository in the same piece of work:
+
+1. `skills/*/SKILL.md`: every mention of the tool, its parameters and its fields.
+2. `scripts/validate-openai.py`: `KNOWN_TOOLS`.
+3. `plugin.json` → `review.test_cases`, and `review-notes.md` (annotation
+   justifications, test cases). A test case must still run on a fresh reviewer
+   account.
+4. `README.md` → "What it can do" / "What it cannot do"; `plugin.json` →
+   `longDescription` and `defaultPrompt`; `marketplace.json` description.
+5. Bump the version in all three manifests, run the validator, commit and push.
+6. ChatGPT: tool changes reach the listing through OpenAI's daily rescan, but
+   new tools stay hidden until approved, and anything inside the package
+   (skills, metadata) needs a new ZIP: build it and upload it as a new version
+   in the plugin portal.
+
+Data obtained from Strava (trainings, curves, zones, readiness) must never be
+exposed through the tools or described in the skills.
+
 ## Documentation and privacy
 
 - Setup guide: <https://endurance-analytics.com/en/connect>
