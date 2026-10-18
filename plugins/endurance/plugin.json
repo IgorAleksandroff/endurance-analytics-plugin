@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "endurance-analytics",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Trail race analytics from Endurance Analytics: search the race catalog, read course terrain (climbs, descents, technicality), pole advice, quad damage from descents, race-day weather at the course and results, plus your own stored races and GPX course upload with terrain analysis.",
   "author": {
     "name": "Endurance Analytics",

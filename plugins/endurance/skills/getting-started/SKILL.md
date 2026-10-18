@@ -61,7 +61,9 @@ follow the `gpx-courses` skill.
 
 - Report only numbers a tool returned. Missing means unknown; say so.
 - A catalog race is identified by slug and season together; get both from
-  `search_races` before calling other race tools.
+  `search_races` before calling other race tools. Search by the name the
+  catalog stores (the organiser's local name): translate exonyms first
+  (Drei Zinnen → Tre Cime) and pass the country as `nation`.
 - Road and trail are different surfaces: paces and heart rates are not
   comparable across them, and a road course is not a slow trail course.
 - The technicality (TDI) of an uploaded course is whatever was passed on

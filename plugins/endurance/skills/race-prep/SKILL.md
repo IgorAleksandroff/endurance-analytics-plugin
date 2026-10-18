@@ -11,9 +11,12 @@ thing (only poles, only weather), answer that and skip the rest.
 
 ## Gather the data
 
-1. `search_races` with the race or event name. A race is identified by slug
-   **and** season; the same slug exists in several seasons. If several races
-   or seasons match, pick the one the athlete means or ask.
+1. `search_races` with the race or event name. The catalog stores the
+   organiser's own name: translate a name from another language to the local or
+   English form (Monte Bianco → Mont Blanc) and pass the country as `nation`.
+   A race is identified by slug **and** season; the same slug exists in several
+   seasons. If several races or seasons match, pick the one the athlete means
+   or ask.
 2. `get_race`: date, start time, time limit, distance, elevation,
    flat-equivalent distance, whether it has a track and results.
 3. `get_race_terrain_summary`: steepness breakdown, longest and steepest
