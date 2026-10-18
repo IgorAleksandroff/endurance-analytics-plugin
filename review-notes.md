@@ -13,7 +13,7 @@ Every tool must carry explicit `readOnlyHint`, `destructiveHint` and
 | Tool | readOnly | destructive | openWorld | Justification |
 | --- | --- | --- | --- | --- |
 | `get_my_profile` | true | false | false | Reads the signed-in athlete's own profile from the Endurance Analytics database. Changes nothing; no access outside the platform. |
-| `get_my_performance_index` | true | false | false | Reads the athlete's own performance index history from the platform database. |
+| `get_my_performance_index` | true | false | false | Reads the athlete's own performance index history and what it rests on (their catalog finishes, their own selected races) from the platform database. |
 | `get_my_races` | true | false | false | Lists the athlete's own stored races with web links. Read only. |
 | `get_my_race` | true | false | false | Reads one of the athlete's own races and its stored terrain analysis. |
 | `get_my_race_track` | true | false | false | Reads the stored, resampled track of one of the athlete's own races. |

@@ -36,7 +36,7 @@ already named a race or a course, skip the tour and help with that.
 | Know the weather at the course on race day | `get_race_weather` |
 | See who ran it and how fast | `get_race_results` |
 | A ready-made written race report | `get_race_report` |
-| Their own profile, index, races, wishlist | `get_my_profile`, `get_my_performance_index`, `get_my_races`, `get_my_race`, `get_my_race_track`, `get_my_wishlist` |
+| Their own profile, index (and what it rests on: their catalog finishes), races, wishlist | `get_my_profile`, `get_my_performance_index`, `get_my_races`, `get_my_race`, `get_my_race_track`, `get_my_wishlist` |
 | Analyse a GPX course they have | `save_gpx_as_race` |
 
 For preparing a race, follow the `race-prep` skill. For uploading a course,
@@ -49,7 +49,9 @@ follow the `gpx-courses` skill.
   Strava data, and Strava's API terms keep that data out of AI tools. Do not
   estimate them from other tools; point the athlete to
   https://endurance-analytics.com, where they can see them.
-- Races imported from Strava are not listed for the same reason.
+- Races imported from Strava are not listed for the same reason, and a
+  performance index computed from them comes back withheld (null) with a web
+  link to the index page.
 - Deleting or editing races, changing settings and payments happen on the
   website. Give the athlete the web link from the tool response.
 - Personal finish-time or pace predictions. Course insights are computed for a

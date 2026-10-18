@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Trail running race analytics for AI assistants.",
-    "version": "1.1.0"
+    "version": "1.2.0"
   },
   "plugins": [
     {
       "name": "endurance",
       "source": "./plugins/endurance",
       "description": "Search the trail race catalog, read course terrain, pole advice, quad damage and race-day weather, and upload GPX courses for terrain analysis.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": {
         "name": "Endurance Analytics",
         "url": "https://endurance-analytics.com"

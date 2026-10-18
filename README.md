@@ -21,7 +21,8 @@ You need an Endurance Analytics account. Sign up at
 - Check race-day weather at the course: the climate record of that date, the
   forecast when the race is close, and what the weather did once it is run
 - Read results of completed races
-- Read your profile, performance index, stored races and race wishlist
+- Read your profile, performance index and the finishes it rests on, stored
+  races and race wishlist
 - Upload a GPX course (by link or file) as one of your races and analyse its
   terrain
 
@@ -29,6 +30,8 @@ You need an Endurance Analytics account. Sign up at
 
 - Training data, endurance curves, heart-rate zones and readiness are not
   available through this integration. They stay on the website.
+- A performance index computed from races imported from Strava is not shown
+  to the assistant either; it gives you a link to the index page instead.
 - Deleting or editing races, settings and payments are website-only. When one
   of those is needed, the assistant gives you a link.
 - Uploading a GPX course uses one of your race slots.

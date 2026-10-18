@@ -33,9 +33,18 @@ weather. Say so; do not fill the gap with a regional description or forecast.
 
 `get_my_profile` and `get_my_performance_index` are context, not inputs to a
 prediction. The one place to use the index is the `pi` parameter of
-`get_race_weather`, which times the course for the athlete. It uses the same
-index multiplied by ten (55.5 % becomes 555); use the index for the athlete's
-gender.
+`get_race_weather`, which times the course for the athlete: pass the `pi` field
+of `get_my_profile` as is, whatever the athlete's gender. An index computed
+from races imported from Strava is withheld (null, with
+`performance_index_withheld`); then omit `pi`, say the course is timed for a
+reference runner, and give the athlete `performance_index_web_url` to see
+their index on the website. Never estimate the index yourself.
+
+For "how did I run X", read `basis.catalog_finishes` of
+`get_my_performance_index`: the athlete's own catalog finishes with time and
+place; pass `race_slug` and `season` to `get_race` or `get_race_results`.
+`basis.my_races` lists the own stored races the manual index is built on
+(open one with `get_my_race`). Races imported from Strava never appear there.
 
 ## Reading the course
 
