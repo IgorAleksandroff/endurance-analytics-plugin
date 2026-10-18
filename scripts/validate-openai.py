@@ -25,6 +25,7 @@ KNOWN_TOOLS = {
     "search_races",
     "get_race",
     "get_race_results",
+    "get_race_splits",
     "get_race_terrain_summary",
     "get_race_pole_advice",
     "get_race_quad_damage",

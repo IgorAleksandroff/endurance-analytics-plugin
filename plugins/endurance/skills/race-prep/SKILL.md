@@ -28,6 +28,8 @@ thing (only poles, only weather), answer that and skip the rest.
 5. `get_race_quad_damage`, `get_race_pole_advice`, `get_race_weather`.
 6. `get_race_results` for context only: winning and typical times, finishers
    and DNFs. Results show what others ran; they say nothing about this athlete.
+   `get_race_splits` traces chosen athletes checkpoint by checkpoint — who led
+   where, where a DNF stopped.
 7. `get_race_report` when the athlete wants a ready-to-share write-up or an
    aid-station table. Pass it through rather than rewriting its numbers.
 

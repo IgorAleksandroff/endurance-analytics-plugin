@@ -35,6 +35,7 @@ already named a race or a course, skip the tour and help with that.
 | Decide on running poles | `get_race_pole_advice` |
 | Know the weather at the course on race day | `get_race_weather` |
 | See who ran it and how fast | `get_race_results` |
+| Trace one athlete checkpoint by checkpoint | `get_race_splits` |
 | A ready-made written race report | `get_race_report` |
 | Their own profile, index (and what it rests on: their catalog finishes), races, wishlist | `get_my_profile`, `get_my_performance_index`, `get_my_races`, `get_my_race`, `get_my_race_track`, `get_my_wishlist` |
 | Analyse a GPX course they have | `save_gpx_as_race` |
