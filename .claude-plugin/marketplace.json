@@ -12,7 +12,7 @@
     {
       "name": "endurance",
       "source": "./plugins/endurance",
-      "description": "Search the trail race catalog, read course terrain, pole advice, quad damage and race-day weather, and upload GPX courses for terrain analysis.",
+      "description": "Trail race season planning, course breakdowns and race-day strategy with weather.",
       "version": "1.2.1",
       "author": {
         "name": "Endurance Analytics",

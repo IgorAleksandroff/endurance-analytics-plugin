@@ -1,7 +1,7 @@
 {
   "name": "endurance",
   "version": "1.2.1",
-  "description": "Trail race analytics: race catalog, course terrain, pole advice, quad damage, race-day weather and results, your stored races, and GPX course upload with terrain analysis.",
+  "description": "Trail race season planning, course breakdowns and race-day strategy with weather.",
   "author": {
     "name": "Endurance Analytics",
     "url": "https://endurance-analytics.com"
