@@ -20,7 +20,8 @@ You need an Endurance Analytics account. Sign up at
 - Advise on running poles: whether to carry them and where to use them
 - Check race-day weather at the course: the climate record of that date, the
   forecast when the race is close, and what the weather did once it is run
-- Read results of completed races
+- Read results of completed races, and trace any athlete checkpoint by
+  checkpoint: arrival times, positions and segment times from the stored splits
 - Read your profile, performance index and the finishes it rests on, stored
   races and race wishlist
 - Upload a GPX course (by link or file) as one of your races and analyse its

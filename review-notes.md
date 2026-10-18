@@ -21,6 +21,7 @@ Every tool must carry explicit `readOnlyHint`, `destructiveHint` and
 | `search_races` | true | false | false | Searches the platform's own race catalog. Bounded dataset, no web search. |
 | `get_race` | true | false | false | Reads one race from the platform's catalog. |
 | `get_race_results` | true | false | false | Reads stored results of a catalog race. No athlete ids or photos are returned. |
+| `get_race_splits` | true | false | false | Reads stored checkpoint splits of a catalog race: the same public results data as `get_race_results`, resolved by athlete name fragment — cumulative arrival time, position and segment time per checkpoint. Nothing beyond what the site's results page shows. |
 | `get_race_terrain_summary` | true | false | false | Reads terrain the platform computed from the stored course track. |
 | `get_race_pole_advice` | true | false | false | Computes pole advice from the stored course geometry. Nothing is written. |
 | `get_race_quad_damage` | true | false | false | Computes descent damage from the stored course geometry. Nothing is written. |
@@ -44,6 +45,7 @@ Positive 5 creates a race; run negative 2 after it so the race exists.
 | 3 | Should I carry poles at the CCC 2026, and where on the course should I use them? | `search_races`, `get_race_pole_advice` | Verdict high; stints in course order with kilometre and elevation; braking spots; same advice for every runner. |
 | 4 | What weather should I expect at the CCC (UTMB Mont-Blanc)? What should I pack? | `search_races`, `get_race_weather` | Course climatology (start and summit temperatures with spread, rain probability, wind, UV, dark time), actual weather of the past edition or the forecast when close; concrete kit advice. |
 | 5 | Save this GPX as my race named 'OCC recon' and tell me how hard it is: https://api.endurance-analytics.com/public/trail/races/utmb-occ/track.gpx?season=2026 | `save_gpx_as_race` | One new race; about 59.5 km / 3400 m, flat-equivalent distance, biggest climbs with positions; says a slot was used, TDI defaulted to 1, surface may be pending, deletion is on the website. |
+| 6 | Trace Francesco Puppi's CCC 2025 checkpoint by checkpoint: where did he lead, and where was the race close? | `search_races`, `get_race_splits` | Splits in course order with values only from the tool: arrival time and position at each checkpoint, segment time with rank and gap, where the gap to the field grew or shrank (that is where the race was decided). Puppi won in about 10:06; no invented intermediate times. |
 
 Values marked "at the time of writing" were read from the live server on
 2026-10-17. The GPX link in case 5 is public and was checked with `curl -I`

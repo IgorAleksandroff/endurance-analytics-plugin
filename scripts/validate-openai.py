@@ -261,7 +261,7 @@ def check_review(rep, review, allow_placeholder):
     if not isinstance(tc, dict):
         rep.err("review.test_cases: required object")
     else:
-        check_cases(rep, tc.get("positive"), "positive", 5,
+        check_cases(rep, tc.get("positive"), "positive", 6,
                     ("description", "prompt", "tools_triggered", "expected_behavior"))
         check_cases(rep, tc.get("negative"), "negative", 3, ("description", "prompt"))
     demo = https_url(rep, review, "demo_recording_url", "review")
@@ -454,6 +454,30 @@ def packaged_files(root):
             yield rel, path
 
 
+def check_tool_sync(rep, root):
+    """KNOWN_TOOLS, the review-notes annotation table and the skills must name the same tool set."""
+    notes = root.parent.parent / "review-notes.md"
+    if not notes.exists():
+        rep.note("review-notes.md not found next to the repo root; tool-sync check skipped")
+        return
+    annotated = set(re.findall(r"^\| `([a-z_]+)` \| (?:true|false) \|", notes.read_text(encoding="utf-8"), re.M))
+    missing = KNOWN_TOOLS - annotated
+    extra = annotated - KNOWN_TOOLS
+    if missing:
+        rep.err(f"review-notes.md annotation table is missing tools: {sorted(missing)}")
+    if extra:
+        rep.err(f"review-notes.md annotates unknown tools: {sorted(extra)}")
+    skills_mentioned = set()
+    for path in sorted((root / "skills").glob("*/SKILL.md")):
+        skills_mentioned.update(re.findall(r"`((?:get|save|search)_[a-z_]+)`", path.read_text(encoding="utf-8")))
+    unmentioned = KNOWN_TOOLS - skills_mentioned
+    invented = skills_mentioned - KNOWN_TOOLS
+    if unmentioned:
+        rep.err(f"skills never mention known tools: {sorted(unmentioned)}")
+    if invented:
+        rep.err(f"skills mention unknown tools: {sorted(invented)}")
+
+
 def check_package(rep, root, docs):
     for rel in FORBIDDEN_PATHS:
         if (root / rel).exists():
@@ -488,6 +512,7 @@ def main():
     url = check_mcp(rep, root)
     check_claude_side(rep, root, url, manifest.get("version"))
     check_skills(rep, root, name)
+    check_tool_sync(rep, root)
     mcp_doc = load_json(root / "mcp.json", Report()) or {}
     check_package(rep, root, {"plugin.json": manifest, "mcp.json": mcp_doc})
 

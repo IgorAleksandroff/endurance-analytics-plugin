@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "endurance-analytics",
-  "version": "1.2.1",
-  "description": "Trail race analytics from Endurance Analytics: search the race catalog, read course terrain (climbs, descents, technicality), pole advice, quad damage from descents, race-day weather at the course and results, plus your own stored races and GPX course upload with terrain analysis.",
+  "version": "1.2.2",
+  "description": "Trail race analytics from Endurance Analytics: search the race catalog, read course terrain (climbs, descents, technicality), pole advice, quad damage from descents, race-day weather at the course, results and athlete checkpoint splits, plus your own stored races and GPX course upload with terrain analysis.",
   "author": {
     "name": "Endurance Analytics",
     "url": "https://endurance-analytics.com"
@@ -16,7 +16,7 @@
       "interface": {
         "displayName": "Endurance Analytics",
         "shortDescription": "Trail race terrain & insights",
-        "longDescription": "Endurance Analytics turns trail race courses into race-day decisions. Ask about any race in the public catalog and get what the platform computed from its course track: flat-equivalent distance, the steepness profile, the longest and steepest climbs and descents with where they fall, surface and technical sections matched against OpenStreetMap, where running poles pay off, how much quad damage the descents inflict and where, and the weather at the course itself: the climate record of the race date, the forecast when the race is close, and what the weather did in past editions. Results of completed races are available for context.\n\nConnect your Endurance Analytics account to read your profile, performance index, stored races and race wishlist, and to upload a GPX course (by link or file) as one of your races for the same terrain analysis.\n\nBuilt for trail and ultra runners preparing for a race, choosing between races, or checking a course they found online.\n\nLimitations: training data, endurance curves, heart-rate zones and readiness are not available through this integration. Deleting or editing races, account settings and payments happen on the website; the assistant gives you a link. Uploading a GPX course uses one of your race slots. Course insights are computed for a reference runner, not personal predictions, and the assistant reports only numbers the platform returns. An Endurance Analytics account is required.",
+        "longDescription": "Endurance Analytics turns trail race courses into race-day decisions. Ask about any race in the public catalog and get what the platform computed from its course track: flat-equivalent distance, the steepness profile, the longest and steepest climbs and descents with where they fall, surface and technical sections matched against OpenStreetMap, where running poles pay off, how much quad damage the descents inflict and where, and the weather at the course itself: the climate record of the race date, the forecast when the race is close, and what the weather did in past editions. Results of completed races are available for context, and any athlete's race can be traced checkpoint by checkpoint: arrival times, positions and segment times from the stored splits.\n\nConnect your Endurance Analytics account to read your profile, performance index, stored races and race wishlist, and to upload a GPX course (by link or file) as one of your races for the same terrain analysis.\n\nBuilt for trail and ultra runners preparing for a race, choosing between races, or checking a course they found online.\n\nLimitations: training data, endurance curves, heart-rate zones and readiness are not available through this integration. Deleting or editing races, account settings and payments happen on the website; the assistant gives you a link. Uploading a GPX course uses one of your race slots. Course insights are computed for a reference runner, not personal predictions, and the assistant reports only numbers the platform returns. An Endurance Analytics account is required.",
         "developerName": "Endurance Analytics",
         "category": "Data & Analytics",
         "websiteURL": "https://endurance-analytics.com",
@@ -66,6 +66,12 @@
               "prompt": "Save this GPX as my race named 'OCC recon' and tell me how hard it is: https://api.endurance-analytics.com/public/trail/races/utmb-occ/track.gpx?season=2026",
               "tools_triggered": "save_gpx_as_race",
               "expected_behavior": "Creates one race in the account and reports its terrain from the tool response: about 59.5 km with about 3400 m of climbing, flat-equivalent distance, and the longest and steepest climbs with their positions. Mentions that the upload used one race slot, that technicality was set to the default of 1 rather than measured, that surface data may still be pending, and that deleting the race is done on the website."
+            },
+            {
+              "description": "Trace one athlete's race checkpoint by checkpoint from stored splits.",
+              "prompt": "Trace Francesco Puppi's CCC 2025 checkpoint by checkpoint: where did he lead, and where was the race close?",
+              "tools_triggered": "search_races, get_race_splits",
+              "expected_behavior": "Finds CCC (UTMB Mont-Blanc) 2025 in the catalog, then walks Puppi's splits in course order with values only from the tool: cumulative arrival time and position at each checkpoint, segment time with its rank and gap, and the aid-station departure where recorded. Points out where the gap to the field grew or shrank as where the race was decided (Puppi won in about 10:06). No invented intermediate times; a missing split is reported as unknown."
             }
           ],
           "negative": [
