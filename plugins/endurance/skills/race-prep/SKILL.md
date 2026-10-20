@@ -26,6 +26,9 @@ thing (only poles, only weather), answer that and skip the rest.
    features worth planning around, in course order. Without the filter a long
    race returns hundreds of segments.
 5. `get_race_quad_damage`, `get_race_pole_advice`, `get_race_weather`.
+   For a course the athlete uploaded, pass `my_race_id` (from `get_my_races`)
+   to `get_race_course_segments`, `get_race_quad_damage`, `get_race_pole_advice`
+   and `get_race_weather` instead of `slug` and `season`.
 6. `get_race_results` for context only: winning and typical times, finishers
    and DNFs. Results show what others ran; they say nothing about this athlete.
    `get_race_splits` traces chosen athletes checkpoint by checkpoint — who led
@@ -50,6 +53,38 @@ For "how did I run X", read `basis.catalog_finishes` of
 place; pass `race_slug` and `season` to `get_race` or `get_race_results`.
 `basis.my_races` lists the own stored races the manual index is built on
 (open one with `get_my_race`). Races imported from Strava never appear there.
+
+## Choosing between races and judging the cut-offs
+
+These tools answer decision questions from catalog data. Quote what they return
+and keep their stated coverage and reasons for empty values.
+
+- `get_race_insights` (slug and season): how the field went, from downloaded
+  results and splits: finish-time percentiles, finishers and drops per
+  checkpoint, median arrival and stop time. With `target_finish_s`, or `pi`
+  with `gender`, it adds the corridor: the finishers closest to that time, when
+  they reached each checkpoint (median and slow edge) and the margin to the
+  cut-off. The corridor holds finishers only, so it says nothing about the
+  drops of runners at that pace. If the edition has no results it lists other
+  editions that do.
+- `find_similar_races` (a `race:{slug}:{season}` or `personal:{id}` reference):
+  races like it by size, climb per km, technicality and altitude, in two
+  groups, measured and declared. Show the differences per feature; never turn
+  them into a similarity percentage. A race flagged as a data error is not to
+  be trusted.
+- `compare_races` (2 or 3 keys): one table with the difference from the first
+  race. Empty cells have reasons; pass them on. It is not a verdict on which
+  race is better for the athlete.
+- `search_races` also filters by months, nations, numeric ranges, track and
+  results, and `registration_open`, and sorts; `total` is the count before
+  paging. `get_race` and the search items carry the registration status the
+  catalog holds with the date it was observed. A missing status is unknown:
+  say so and point to the organiser.
+- `get_my_plan` reads the athlete's season plan; races imported from Strava are
+  never in it. `check_season_plan` checks the calendar of prioritised races by
+  fixed rules (spacing, lead-in races, backups) and takes candidates that are
+  not in the plan yet. It says nothing about fitness. The plan is changed on the
+  website only.
 
 ## Reading the course
 

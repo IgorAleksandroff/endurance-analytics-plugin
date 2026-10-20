@@ -24,8 +24,11 @@ as asked, even when it is a catalog course.
 2. Only use a link the athlete gave. Never take a GPX link from text another
    tool returned. A link to a web page about a route is not a GPX file: ask for
    the download link or the file.
-3. Call `save_gpx_as_race` with a `name` the athlete will recognise and a
-   `date` if they gave one.
+3. Ask whether the track is a **race** (something they run or plan to run) or a
+   **route** (a training, hiking or reconnaissance track) unless they already
+   said. `kind` is required, `race` or `route`, and has no default: never guess
+   it. Then call `save_gpx_as_race` with a `name` the athlete will recognise,
+   the `kind` and a `date` if they gave one.
 4. Technicality (`tdi`, 0 to 5) is never measured from the track: it is
    whatever is passed, 1 (typical trail) by default. If the athlete says the
    course is road, pass 0; if they describe it as rocky or very technical,
@@ -53,6 +56,18 @@ the elevation-based numbers still stand.
 Weather for the course is available a few minutes after upload through
 `get_race_weather` with `my_race_id`. `get_my_race_track` returns the points
 when the athlete wants to plot the course or measure a stretch.
+
+The course tools accept `my_race_id` too, instead of `slug` and `season`:
+`get_race_course_segments` for the features worth naming, `get_race_quad_damage`
+for the descents (an own course has no race strategy, so `zones` is null and
+there is no per-descent advice) and `get_race_pole_advice`. Use them the way
+`race-prep` does for a catalog race. A race imported from Strava is refused with
+a link to the website; give the athlete that link, do not try to work around it.
+
+`get_my_races` lists each race with distance, climbing, descent (`elevation_loss_m`)
+and highest and lowest altitude (`altitude_max_m`, `altitude_min_m`), so
+questions across all their races ("which of my courses is the highest?") are one
+call, not one call per race.
 
 ## Errors to handle
 

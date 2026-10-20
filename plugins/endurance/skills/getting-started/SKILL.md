@@ -37,10 +37,13 @@ already named a race or a course, skip the tour and help with that.
 | See who ran it and how fast | `get_race_results` |
 | Trace one athlete checkpoint by checkpoint | `get_race_splits` |
 | A ready-made written race report | `get_race_report` |
-| Their own profile, index (and what it rests on: their catalog finishes), races, wishlist | `get_my_profile`, `get_my_performance_index`, `get_my_races`, `get_my_race`, `get_my_race_track`, `get_my_wishlist` |
-| Analyse a GPX course they have | `save_gpx_as_race` |
+| How a race's field went: finish-time percentiles, drops and cut-off margins per checkpoint | `get_race_insights` |
+| Races like a given one, or races side by side | `find_similar_races`, `compare_races` |
+| Their own profile, index (and what it rests on: their catalog finishes), races (with climbing, descent and altitudes), season plan | `get_my_profile`, `get_my_performance_index`, `get_my_races`, `get_my_race`, `get_my_race_track`, `get_my_plan` |
+| Check the calendar of their prioritised races | `check_season_plan` |
+| Analyse a GPX course they have | `save_gpx_as_race` (asks whether it is a race or a route) |
 
-For preparing a race, follow the `race-prep` skill. For uploading a course,
+For preparing a race or choosing between races, follow the `race-prep` skill. For uploading a course,
 follow the `gpx-courses` skill.
 
 ## What it cannot do
@@ -53,8 +56,8 @@ follow the `gpx-courses` skill.
 - Races imported from Strava are not listed for the same reason, and a
   performance index computed from them comes back withheld (null) with a web
   link to the index page.
-- Deleting or editing races, changing settings and payments happen on the
-  website. Give the athlete the web link from the tool response.
+- Deleting or editing races and plan entries, changing settings and payments
+  happen on the website. Give the athlete the web link from the tool response.
 - Personal finish-time or pace predictions. Course insights are computed for a
   reference runner; quote them as such.
 

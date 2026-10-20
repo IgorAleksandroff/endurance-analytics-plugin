@@ -22,10 +22,15 @@ You need an Endurance Analytics account. Sign up at
   forecast when the race is close, and what the weather did once it is run
 - Read results of completed races, and trace any athlete checkpoint by
   checkpoint: arrival times, positions and segment times from the stored splits
+- See how the field of a race went: finish-time percentiles, drops and cut-off
+  margins per checkpoint, and the corridor of finishers around a target time
+- Find races like a given one and compare two or three races side by side
+- Search the catalog by terrain, month, country and open registration
 - Read your profile, performance index and the finishes it rests on, stored
-  races and race wishlist
-- Upload a GPX course (by link or file) as one of your races and analyse its
-  terrain
+  races and season plan, and check the calendar of your prioritised races
+- Upload a GPX course (by link or file) as a race or a route and analyse its
+  terrain, its descents and poles, the same way as a catalog race, and see climb,
+  descent and altitudes of all your stored races at once
 
 ## What it cannot do
 
@@ -33,7 +38,8 @@ You need an Endurance Analytics account. Sign up at
   available through this integration. They stay on the website.
 - A performance index computed from races imported from Strava is not shown
   to the assistant either; it gives you a link to the index page instead.
-- Deleting or editing races, settings and payments are website-only. When one
+- Deleting or editing races and plan entries, settings and payments are
+  website-only. When one
   of those is needed, the assistant gives you a link.
 - Uploading a GPX course uses one of your race slots.
 

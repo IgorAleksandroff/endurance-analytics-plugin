@@ -21,7 +21,8 @@ KNOWN_TOOLS = {
     "get_my_races",
     "get_my_race",
     "get_my_race_track",
-    "get_my_wishlist",
+    "get_my_plan",
+    "check_season_plan",
     "search_races",
     "get_race",
     "get_race_results",
@@ -32,6 +33,9 @@ KNOWN_TOOLS = {
     "get_race_course_segments",
     "get_race_weather",
     "get_race_report",
+    "get_race_insights",
+    "find_similar_races",
+    "compare_races",
     "save_gpx_as_race",
 }
 
@@ -469,7 +473,7 @@ def check_tool_sync(rep, root):
         rep.err(f"review-notes.md annotates unknown tools: {sorted(extra)}")
     skills_mentioned = set()
     for path in sorted((root / "skills").glob("*/SKILL.md")):
-        skills_mentioned.update(re.findall(r"`((?:get|save|search)_[a-z_]+)`", path.read_text(encoding="utf-8")))
+        skills_mentioned.update(re.findall(r"`((?:get|save|search|find|check|compare)_[a-z_]+)`", path.read_text(encoding="utf-8")))
     unmentioned = KNOWN_TOOLS - skills_mentioned
     invented = skills_mentioned - KNOWN_TOOLS
     if unmentioned:

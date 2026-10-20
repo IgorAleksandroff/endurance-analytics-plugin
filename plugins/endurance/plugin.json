@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "endurance-analytics",
-  "version": "1.2.2",
-  "description": "Trail race analytics from Endurance Analytics: search the race catalog, read course terrain (climbs, descents, technicality), pole advice, quad damage from descents, race-day weather at the course, results and athlete checkpoint splits, plus your own stored races and GPX course upload with terrain analysis.",
+  "version": "2.1.0",
+  "description": "Trail race analytics from Endurance Analytics: search the race catalog, read course terrain (climbs, descents, technicality), pole advice, quad damage from descents, race-day weather at the course, results and athlete checkpoint splits, field insights and cut-off corridors, similar and side-by-side races, plus your own stored races, season plan and GPX course upload with terrain analysis.",
   "author": {
     "name": "Endurance Analytics",
     "url": "https://endurance-analytics.com"
@@ -10,13 +10,21 @@
   "homepage": "https://endurance-analytics.com/en/connect",
   "repository": "https://github.com/IgorAleksandroff/endurance-analytics-plugin",
   "license": "MIT",
-  "keywords": ["trail-running", "ultra", "race", "gpx", "terrain", "weather", "analytics"],
+  "keywords": [
+    "trail-running",
+    "ultra",
+    "race",
+    "gpx",
+    "terrain",
+    "weather",
+    "analytics"
+  ],
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "Endurance Analytics",
         "shortDescription": "Trail race terrain & insights",
-        "longDescription": "Endurance Analytics turns trail race courses into race-day decisions. Ask about any race in the public catalog and get what the platform computed from its course track: flat-equivalent distance, the steepness profile, the longest and steepest climbs and descents with where they fall, surface and technical sections matched against OpenStreetMap, where running poles pay off, how much quad damage the descents inflict and where, and the weather at the course itself: the climate record of the race date, the forecast when the race is close, and what the weather did in past editions. Results of completed races are available for context, and any athlete's race can be traced checkpoint by checkpoint: arrival times, positions and segment times from the stored splits.\n\nConnect your Endurance Analytics account to read your profile, performance index, stored races and race wishlist, and to upload a GPX course (by link or file) as one of your races for the same terrain analysis.\n\nBuilt for trail and ultra runners preparing for a race, choosing between races, or checking a course they found online.\n\nLimitations: training data, endurance curves, heart-rate zones and readiness are not available through this integration. Deleting or editing races, account settings and payments happen on the website; the assistant gives you a link. Uploading a GPX course uses one of your race slots. Course insights are computed for a reference runner, not personal predictions, and the assistant reports only numbers the platform returns. An Endurance Analytics account is required.",
+        "longDescription": "Endurance Analytics turns trail race courses into race-day decisions. Ask about any race in the public catalog and get what the platform computed from its course track: flat-equivalent distance, the steepness profile, the longest and steepest climbs and descents with where they fall, surface and technical sections matched against OpenStreetMap, where running poles pay off, how much quad damage the descents inflict and where, and the weather at the course itself: the climate record of the race date, the forecast when the race is close, and what the weather did in past editions. Results of completed races are available for context, any athlete's race can be traced checkpoint by checkpoint, and the platform shows how the field went: finish-time percentiles, drops and cut-off margins per checkpoint, races similar to a given one and up to three races side by side.\n\nConnect your Endurance Analytics account to read your profile, performance index, stored races and season plan, check the calendar of your prioritised races, and upload a GPX course (by link or file) as a race or a route for the same terrain, descent and pole analysis; your stored races come with climb, descent and altitudes.\n\nBuilt for trail and ultra runners preparing for a race, choosing between races, or checking a course they found online.\n\nLimitations: training data, endurance curves, heart-rate zones and readiness are not available through this integration. Deleting or editing races and plan entries, account settings and payments happen on the website; the assistant gives you a link. Uploading a GPX course uses one of your race slots. Course insights are computed for a reference runner, not personal predictions, and the assistant reports only numbers the platform returns. An Endurance Analytics account is required.",
         "developerName": "Endurance Analytics",
         "category": "Data & Analytics",
         "websiteURL": "https://endurance-analytics.com",
@@ -26,7 +34,7 @@
         "defaultPrompt": [
           "Help me prepare for the CCC: key climbs, descents, poles and race-day weather.",
           "Find trail races in Italy next summer that have a course track.",
-          "Which UTMB Mont-Blanc 2026 race has the most quad-damaging descents?"
+          "Compare OCC, CCC and TDS 2026: which has the toughest descents and the tightest cut-offs?"
         ],
         "brandColor": "#0068B2",
         "brandColorDark": "#0086E6",
@@ -50,12 +58,6 @@
               "expected_behavior": "Describes the point-to-point course of about 59.5 km and 3400 m of climbing with its highest point near km 34, names the longest climb (about 4.8 km at about 15% ending near km 17) and the steepest sections with their kilometre positions, then reports the quad-damage level (moderate at the time of writing) and the critical descents in course order with their kilometres. States that the damage figures are for a typical runner, not a personal prediction."
             },
             {
-              "description": "Advise on running poles for a long mountain race.",
-              "prompt": "Should I carry poles at the CCC 2026, and where on the course should I use them?",
-              "tools_triggered": "search_races, get_race_pole_advice",
-              "expected_behavior": "Gives the platform's verdict (high at the time of writing) and walks the pole plan in course order: where poles come out and go away, with kilometre and elevation for each stint, and where braking with poles is recommended. Explains that the verdict comes from course geometry and is the same for every runner."
-            },
-            {
               "description": "Report race-day weather at the course.",
               "prompt": "What weather should I expect at the CCC (UTMB Mont-Blanc)? What should I pack?",
               "tools_triggered": "search_races, get_race_weather",
@@ -63,15 +65,21 @@
             },
             {
               "description": "Upload a GPX course by link and analyse its terrain.",
-              "prompt": "Save this GPX as my race named 'OCC recon' and tell me how hard it is: https://api.endurance-analytics.com/public/trail/races/utmb-occ/track.gpx?season=2026",
+              "prompt": "Save this GPX as my race (not a training route) named 'OCC recon' and tell me how hard it is: https://api.endurance-analytics.com/public/trail/races/utmb-occ/track.gpx?season=2026",
               "tools_triggered": "save_gpx_as_race",
               "expected_behavior": "Creates one race in the account and reports its terrain from the tool response: about 59.5 km with about 3400 m of climbing, flat-equivalent distance, and the longest and steepest climbs with their positions. Mentions that the upload used one race slot, that technicality was set to the default of 1 rather than measured, that surface data may still be pending, and that deleting the race is done on the website."
             },
             {
-              "description": "Trace one athlete's race checkpoint by checkpoint from stored splits.",
-              "prompt": "Trace Francesco Puppi's CCC 2025 checkpoint by checkpoint: where did he lead, and where was the race close?",
-              "tools_triggered": "search_races, get_race_splits",
-              "expected_behavior": "Finds CCC (UTMB Mont-Blanc) 2025 in the catalog, then walks Puppi's splits in course order with values only from the tool: cumulative arrival time and position at each checkpoint, segment time with its rank and gap, and the aid-station departure where recorded. Points out where the gap to the field grew or shrank as where the race was decided (Puppi won in about 10:06). No invented intermediate times; a missing split is reported as unknown."
+              "description": "Compare races side by side.",
+              "prompt": "Compare OCC 2026, CCC 2026 and TDS 2026: distance, climb, technicality and the longest gap between aid stations.",
+              "tools_triggered": "search_races, compare_races",
+              "expected_behavior": "Finds the three 2026 races and shows one table with the catalog's values and each difference from the first race. Empty cells are reported as unknown with the reason the tool gives; no invented numbers and no verdict on which race is better for the athlete."
+            },
+            {
+              "description": "Judge the cut-offs from how the field went.",
+              "prompt": "If I finish the CCC 2025 in about 24 hours, how close would I be to the cut-offs, and where do runners drop?",
+              "tools_triggered": "search_races, get_race_insights",
+              "expected_behavior": "Uses the corridor of finishers near that time: when they reached each checkpoint (median and slow edge) and the margin to the cut-off, with the coverage the tool states. Says the corridor holds finishers only and does not describe the runners who dropped at that pace; no personal prediction."
             }
           ],
           "negative": [
@@ -94,7 +102,7 @@
       },
       "publication": {
         "countries": [],
-        "release_notes": "Initial ChatGPT release: race catalog, terrain and race-day insights, personal races and GPX upload."
+        "release_notes": "Your own GPX courses get the same descent, pole and segment analysis as catalog races, and the list of your races carries descent and altitudes. Field insights and cut-off corridors, similar and side-by-side races, season plan reading and calendar check, catalog search by terrain, month and registration, GPX upload now asks whether it is a race or a route."
       }
     }
   }
