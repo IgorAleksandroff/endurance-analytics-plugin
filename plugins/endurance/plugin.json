@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "endurance-analytics",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Trail race analytics from Endurance Analytics: search the race catalog, read course terrain (climbs, descents, technicality), pole advice, quad damage from descents, race-day weather at the course, results and athlete checkpoint splits, field insights and cut-off corridors, similar and side-by-side races, plus your own stored races, season plan and GPX course upload with terrain analysis.",
   "author": {
     "name": "Endurance Analytics",
@@ -24,7 +24,7 @@
       "interface": {
         "displayName": "Endurance Analytics",
         "shortDescription": "Trail race terrain & insights",
-        "longDescription": "Endurance Analytics turns trail race courses into race-day decisions. Ask about any race in the public catalog and get what the platform computed from its course track: flat-equivalent distance, the steepness profile, the longest and steepest climbs and descents with where they fall, surface and technical sections matched against OpenStreetMap, where running poles pay off, how much quad damage the descents inflict and where, and the weather at the course itself: the climate record of the race date, the forecast when the race is close, and what the weather did in past editions. Results of completed races are available for context, any athlete's race can be traced checkpoint by checkpoint, and the platform shows how the field went: finish-time percentiles, drops and cut-off margins per checkpoint, races similar to a given one and up to three races side by side.\n\nConnect your Endurance Analytics account to read your profile, performance index, stored races and season plan, check the calendar of your prioritised races, and upload a GPX course (by link or file) as a race or a route for the same terrain, descent and pole analysis; your stored races come with climb, descent and altitudes.\n\nBuilt for trail and ultra runners preparing for a race, choosing between races, or checking a course they found online.\n\nLimitations: training data, endurance curves, heart-rate zones and readiness are not available through this integration. Deleting or editing races and plan entries, account settings and payments happen on the website; the assistant gives you a link. Uploading a GPX course uses one of your race slots. Course insights are computed for a reference runner, not personal predictions, and the assistant reports only numbers the platform returns. An Endurance Analytics account is required.",
+        "longDescription": "Endurance Analytics turns trail race courses into race-day decisions. Ask about any race in the public catalog and get what the platform computed from its course track: flat-equivalent distance, the steepness profile, the longest and steepest climbs and descents with where they fall, surface and technical sections matched against OpenStreetMap, where running poles pay off, how much quad damage the descents inflict and where, and the weather at the course itself: the climate record of the race date, the forecast when the race is close, and what the weather did in past editions. Results of completed races are available for context, any athlete's race can be traced checkpoint by checkpoint, and the platform shows how the field went: finish-time percentiles, drops and cut-off margins per checkpoint, races similar to a given one and up to three races side by side. Practical race questions (supporters, bib pickup, gear, poles) are answered from the race FAQ with the source, edition and date of every answer.\n\nConnect your Endurance Analytics account to read your profile, performance index, stored races and season plan, check the calendar of your prioritised races, and upload a GPX course (by link or file) as a race or a route for the same terrain, descent and pole analysis; your stored races come with climb, descent and altitudes.\n\nBuilt for trail and ultra runners preparing for a race, choosing between races, or checking a course they found online.\n\nLimitations: training data, endurance curves, heart-rate zones and readiness are not available through this integration. Deleting or editing races and plan entries, account settings and payments happen on the website; the assistant gives you a link. Uploading a GPX course uses one of your race slots. Course insights are computed for a reference runner, not personal predictions, and the assistant reports only numbers the platform returns. An Endurance Analytics account is required.",
         "developerName": "Endurance Analytics",
         "category": "Data & Analytics",
         "websiteURL": "https://endurance-analytics.com",
@@ -93,7 +93,7 @@
             },
             {
               "description": "The request is unrelated to race analytics. The plugin should not be used and no Endurance Analytics tool should be called.",
-              "prompt": "Book me a hotel in Chamonix for the last week of August."
+              "prompt": "Order me a pizza to my flat in Annecy for 8 pm tonight."
             }
           ]
         },
@@ -102,7 +102,7 @@
       },
       "publication": {
         "countries": [],
-        "release_notes": "Your own GPX courses get the same descent, pole and segment analysis as catalog races, and the list of your races carries descent and altitudes. Field insights and cut-off corridors, similar and side-by-side races, season plan reading and calendar check, catalog search by terrain, month and registration, GPX upload now asks whether it is a race or a route."
+        "release_notes": "Your own GPX courses get the same descent, pole and segment analysis as catalog races, and the list of your races carries descent and altitudes. Field insights and cut-off corridors, similar and side-by-side races, season plan reading and calendar check, catalog search by terrain, month and registration, GPX upload now asks whether it is a race or a route. New: the race FAQ and the history of the event, with the origin, edition and date of every answer."
       }
     }
   }

@@ -32,6 +32,7 @@ KNOWN_TOOLS = {
     "get_race_quad_damage",
     "get_race_course_segments",
     "get_race_weather",
+    "get_race_faq",
     "get_race_report",
     "get_race_insights",
     "find_similar_races",

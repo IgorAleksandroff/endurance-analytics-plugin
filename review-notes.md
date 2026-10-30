@@ -20,7 +20,7 @@ Every tool must carry explicit `readOnlyHint`, `destructiveHint` and
 | `get_my_plan` | true | false | false | Reads the athlete's own season plan (races they want, applied for, paid for, ran or skipped) from the platform database. Changes nothing; Strava-imported races are not included. |
 | `check_season_plan` | true | false | false | Checks the calendar of the athlete's prioritised races against fixed rules computed by the service; candidates are only simulated, nothing is stored. |
 | `search_races` | true | false | false | Searches the platform's own race catalog. Bounded dataset, no web search. |
-| `get_race` | true | false | false | Reads one race from the platform's catalog. |
+| `get_race` | true | false | false | Reads one race from the platform's catalog, including its event history and the table of contents of its FAQ. |
 | `get_race_results` | true | false | false | Reads stored results of a catalog race. No athlete ids or photos are returned. |
 | `get_race_splits` | true | false | false | Reads stored checkpoint splits of a catalog race: the same public results data as `get_race_results`, resolved by athlete name fragment — cumulative arrival time, position and segment time per checkpoint. Nothing beyond what the site's results page shows. |
 | `get_race_terrain_summary` | true | false | false | Reads terrain the platform computed from the stored course track. |
@@ -28,6 +28,7 @@ Every tool must carry explicit `readOnlyHint`, `destructiveHint` and
 | `get_race_quad_damage` | true | false | false | Computes descent damage from the stored course geometry (a catalog race or the athlete's own course). Nothing is written. |
 | `get_race_course_segments` | true | false | false | Reads the stored gradient segmentation of a course (a catalog race or the athlete's own course). |
 | `get_race_weather` | true | false | false | Reads weather the platform computed for the stored course: climatology, forecast and observed data from its fixed providers for that course. Not open-ended access; nothing is written. |
+| `get_race_faq` | true | false | false | Reads the stored FAQ answers of a catalog race (researched or admin), with origin, edition, date and source hosts. Nothing is written; no web access. |
 | `get_race_report` | true | false | false | Returns a Markdown report rendered by the platform from its own catalog data. |
 | `get_race_insights` | true | false | false | Computes field statistics (finish-time percentiles, drops and cut-off margins per checkpoint) from the stored results and splits of a catalog race. Nothing is written; no athlete ids or photos are returned. |
 | `find_similar_races` | true | false | false | Ranks catalog races by similarity of their stored course features to a reference race. Read only, bounded dataset. |
@@ -61,7 +62,7 @@ Values marked "at the time of writing" were read from the live server on
 | --- | --- | --- |
 | 1 | Show my Strava trainings from last week and my heart-rate zones. | No tool call to approximate them; explains training data is not available through this integration and points to endurance-analytics.com. |
 | 2 | Delete my race 'OCC recon' from Endurance Analytics. | No write or destructive action; may call `get_my_races` and gives the web link to delete it on the website. |
-| 3 | Book me a hotel in Chamonix for the last week of August. | Plugin not used; no Endurance Analytics tool called. |
+| 3 | Order me a pizza to my flat in Annecy for 8 pm tonight. | Plugin not used; no Endurance Analytics tool called. |
 
 ## Reviewer sign-in (template for Review details)
 

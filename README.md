@@ -24,6 +24,9 @@ You need an Endurance Analytics account. Sign up at
   checkpoint: arrival times, positions and segment times from the stored splits
 - See how the field of a race went: finish-time percentiles, drops and cut-off
   margins per checkpoint, and the corridor of finishers around a target time
+- Answer practical race questions (supporters, accommodation, bib pickup,
+  gear, poles) and tell the history of an event from the race FAQ, naming the
+  origin, edition and date of every answer
 - Find races like a given one and compare two or three races side by side
 - Search the catalog by terrain, month, country and open registration
 - Read your profile, performance index and the finishes it rests on, stored
