@@ -38,6 +38,12 @@ KNOWN_TOOLS = {
     "find_similar_races",
     "compare_races",
     "save_gpx_as_race",
+    "change_my_plan",
+    "get_my_plan_history",
+    "undo_plan_change",
+    "send_feedback",
+    "request_catalog_race",
+    "get_my_requests",
 }
 
 CATEGORIES = {
@@ -474,7 +480,7 @@ def check_tool_sync(rep, root):
         rep.err(f"review-notes.md annotates unknown tools: {sorted(extra)}")
     skills_mentioned = set()
     for path in sorted((root / "skills").glob("*/SKILL.md")):
-        skills_mentioned.update(re.findall(r"`((?:get|save|search|find|check|compare)_[a-z_]+)`", path.read_text(encoding="utf-8")))
+        skills_mentioned.update(re.findall(r"`((?:get|save|search|find|check|compare|change|undo|send|request)_[a-z_]+)`", path.read_text(encoding="utf-8")))
     unmentioned = KNOWN_TOOLS - skills_mentioned
     invented = skills_mentioned - KNOWN_TOOLS
     if unmentioned:

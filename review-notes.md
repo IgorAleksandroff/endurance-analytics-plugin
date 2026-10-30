@@ -34,6 +34,12 @@ Every tool must carry explicit `readOnlyHint`, `destructiveHint` and
 | `find_similar_races` | true | false | false | Ranks catalog races by similarity of their stored course features to a reference race. Read only, bounded dataset. |
 | `compare_races` | true | false | false | Builds a side-by-side table of two or three races from stored catalog data. Read only. |
 | `save_gpx_as_race` | false | false | true | Creates a new race in the athlete's account and uses one race slot. Never overwrites or deletes existing data (deletion is website-only). Open-world because it downloads a GPX file from an arbitrary https URL the user supplies. |
+| `change_my_plan` | false | true | false | Adds, changes or removes entries of the athlete's own season plan inside the platform. Destructive because it can remove an entry; every change is journaled and can be reverted for 90 days with `undo_plan_change`. No access outside the platform. |
+| `get_my_plan_history` | true | false | false | Reads the athlete's own season plan change history (last 90 days) from the platform database. |
+| `undo_plan_change` | false | true | false | Reverts the athlete's own season plan changes by history id: may remove an entry that a reverted change added. Journaled itself, so it can be reverted too. No access outside the platform. |
+| `send_feedback` | false | false | false | Stores the athlete's own idea, bug report or complaint in the platform's feedback queue, within fixed daily and monthly limits. Changes none of the athlete's data. |
+| `request_catalog_race` | false | false | false | Stores the athlete's request to add a race or a course track to the platform catalog (3 a day). Changes none of the athlete's data; no fetch of the given URL. |
+| `get_my_requests` | true | false | false | Reads the athlete's own feedback and catalog requests with status and the team's reply. |
 
 ## Test cases
 
@@ -61,7 +67,7 @@ Values marked "at the time of writing" were read from the live server on
 | # | Prompt | Expected |
 | --- | --- | --- |
 | 1 | Show my Strava trainings from last week and my heart-rate zones. | No tool call to approximate them; explains training data is not available through this integration and points to endurance-analytics.com. |
-| 2 | Delete my race 'OCC recon' from Endurance Analytics. | No write or destructive action; may call `get_my_races` and gives the web link to delete it on the website. |
+| 2 | Delete my race 'OCC recon' from Endurance Analytics. | No write or destructive action on stored races; may call `get_my_races` and gives the web link to delete it on the website. |
 | 3 | Order me a pizza to my flat in Annecy for 8 pm tonight. | Plugin not used; no Endurance Analytics tool called. |
 
 ## Reviewer sign-in (template for Review details)

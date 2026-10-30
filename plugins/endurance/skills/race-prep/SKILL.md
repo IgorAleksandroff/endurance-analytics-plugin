@@ -98,8 +98,10 @@ and keep their stated coverage and reasons for empty values.
 - `get_my_plan` reads the athlete's season plan; races imported from Strava are
   never in it. `check_season_plan` checks the calendar of prioritised races by
   fixed rules (spacing, lead-in races, backups) and takes candidates that are
-  not in the plan yet. It says nothing about fitness. The plan is changed on the
-  website only.
+  not in the plan yet. It says nothing about fitness. `change_my_plan` adds,
+  changes or removes entries when the athlete asks (check the calendar first with
+  the same races as candidates); it applies at once and returns `undo` ids for
+  `undo_plan_change`.
 
 ## Reading the course
 

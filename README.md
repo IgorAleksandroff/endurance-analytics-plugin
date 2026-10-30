@@ -31,6 +31,10 @@ You need an Endurance Analytics account. Sign up at
 - Search the catalog by terrain, month, country and open registration
 - Read your profile, performance index and the finishes it rests on, stored
   races and season plan, and check the calendar of your prioritised races
+- Add, change and remove races in your season plan (the wishlist is its Wish
+  tab); every change is kept 90 days in the plan history and can be undone
+- Send the team your idea, bug report or complaint, or ask for a missing race
+  or course track, and see the answers
 - Upload a GPX course (by link or file) as a race or a route and analyse its
   terrain, its descents and poles, the same way as a catalog race, and see climb,
   descent and altitudes of all your stored races at once
@@ -41,7 +45,7 @@ You need an Endurance Analytics account. Sign up at
   available through this integration. They stay on the website.
 - A performance index computed from races imported from Strava is not shown
   to the assistant either; it gives you a link to the index page instead.
-- Deleting or editing races and plan entries, settings and payments are
+- Deleting or editing your stored races, settings and payments are
   website-only. When one
   of those is needed, the assistant gives you a link.
 - Uploading a GPX course uses one of your race slots.

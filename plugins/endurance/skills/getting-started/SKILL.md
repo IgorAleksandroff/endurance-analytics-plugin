@@ -42,6 +42,8 @@ already named a race or a course, skip the tour and help with that.
 | Races like a given one, or races side by side | `find_similar_races`, `compare_races` |
 | Their own profile, index (and what it rests on: their catalog finishes), races (with climbing, descent and altitudes), season plan | `get_my_profile`, `get_my_performance_index`, `get_my_races`, `get_my_race`, `get_my_race_track`, `get_my_plan` |
 | Check the calendar of their prioritised races | `check_season_plan` |
+| Add, change or remove races in their season plan (the wishlist is its Wish tab), or undo a change | `change_my_plan`, `get_my_plan_history`, `undo_plan_change` |
+| Send the team an idea, bug report or complaint, ask for a missing race or course track, see the answers | `send_feedback`, `request_catalog_race`, `get_my_requests` |
 | Analyse a GPX course they have | `save_gpx_as_race` (asks whether it is a race or a route) |
 
 For preparing a race or choosing between races, follow the `race-prep` skill. For uploading a course,
@@ -57,8 +59,11 @@ follow the `gpx-courses` skill.
 - Races imported from Strava are not listed for the same reason, and a
   performance index computed from them comes back withheld (null) with a web
   link to the index page.
-- Deleting or editing races and plan entries, changing settings and payments
+- Deleting or editing their stored races, changing settings and payments
   happen on the website. Give the athlete the web link from the tool response.
+  The season plan is the exception: it changes at once and every change can be
+  undone for 90 days, so change or remove only what the athlete asked for.
+  Feedback and requests go in the athlete's own words, only when they asked.
 - Personal finish-time or pace predictions. Course insights are computed for a
   reference runner; quote them as such.
 
