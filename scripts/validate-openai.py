@@ -44,6 +44,8 @@ KNOWN_TOOLS = {
     "send_feedback",
     "request_catalog_race",
     "get_my_requests",
+    "get_race_plan",
+    "get_nutrition_catalog",
 }
 
 CATEGORIES = {

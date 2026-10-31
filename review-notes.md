@@ -40,6 +40,8 @@ Every tool must carry explicit `readOnlyHint`, `destructiveHint` and
 | `send_feedback` | false | false | false | Stores the athlete's own idea, bug report or complaint in the platform's feedback queue, within fixed daily and monthly limits. Changes none of the athlete's data. |
 | `request_catalog_race` | false | false | false | Stores the athlete's request to add a race or a course track to the platform catalog (3 a day). Changes none of the athlete's data; no fetch of the given URL. |
 | `get_my_requests` | true | false | false | Reads the athlete's own feedback and catalog requests with status and the team's reply. |
+| `get_race_plan` | true | false | false | Computes a race-day plan (aid station times, cut-off margins, fuel per segment) from the stored course and aid stations of a catalog race or the athlete's own course, and reads the athlete's own saved race plans. Nothing is written. |
+| `get_nutrition_catalog` | true | false | false | Reads the platform's small generic fuel catalog (gels, food, drinks, salt tabs). Read only. |
 
 ## Test cases
 
@@ -56,10 +58,11 @@ The GPX positive case creates a race; run negative 2 after it so the race exists
 | 3 | What weather should I expect at the CCC (UTMB Mont-Blanc)? What should I pack? | `search_races`, `get_race_weather` | Reports the climate record of the race date at the course: typical start and summit temperatures with their p10 to p90 spread, rain probability, wind and UV, and time spent in the dark, plus what the weather actually did for an edition that already happened (or the forecast when the race is within about ten days). Turns the spread and the dark time into concrete kit advice such as rain gear and a head torch, without quoting a regional town forecast. |
 | 4 | Save this GPX as my race (not a training route) named 'OCC recon' and tell me how hard it is: https://api.endurance-analytics.com/public/trail/races/utmb-occ/track.gpx?season=2026 | `save_gpx_as_race` | Creates one race in the account and reports its terrain from the tool response: about 59.5 km with about 3400 m of climbing, flat-equivalent distance, and the longest and steepest climbs with their positions. Mentions that the upload used one race slot, that technicality was set to the default of 1 rather than measured, that surface data may still be pending, and that deleting the race is done on the website. |
 | 5 | Compare OCC 2026, CCC 2026 and TDS 2026: distance, climb, technicality and the longest gap between aid stations. | `search_races`, `compare_races` | Finds the three 2026 races and shows one table with the catalog's values and each difference from the first race. Empty cells are reported as unknown with the reason the tool gives; no invented numbers and no verdict on which race is better for the athlete. |
-| 6 | If I finish the CCC 2025 in about 24 hours, how close would I be to the cut-offs, and where do runners drop? | `search_races`, `get_race_insights` | Uses the corridor of finishers near that time: when they reached each checkpoint (median and slow edge) and the margin to the cut-off, with the coverage the tool states. Says the corridor holds finishers only and does not describe the runners who dropped at that pace; no personal prediction. |
+| 6 | Make me a race plan for the CCC 2026 for about 24 hours: when do I reach each aid station, how close am I to the cut-offs, and what should I eat and drink? | `search_races`, `get_race_plan` | Lists the aid stations in course order with the arrival time at a 24-hour finish and the margin to each cut-off, exactly as the tool returns them, and the fuel per segment and in total (gels, water or drink, salt) with the hourly rhythm. Says the margins come from the time model, not from how real finishers did, and that the plan is not saved; the athlete can adjust and save it on the race page. No time, margin or gel count recomputed by the assistant. |
 
 Values marked "at the time of writing" were read from the live server on
-2026-10-17. The GPX link in case 4 is public and was checked with `curl -I`
+2026-10-17. Case 6 needs server 3.5.0 (`get_race_plan`): run it on the live
+server after that release and before submitting. The GPX link in case 4 is public and was checked with `curl -I`
 (HTTP 200, `application/gpx+xml`).
 
 ### Negative

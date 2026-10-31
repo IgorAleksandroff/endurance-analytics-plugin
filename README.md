@@ -27,6 +27,9 @@ You need an Endurance Analytics account. Sign up at
 - Answer practical race questions (supporters, accommodation, bib pickup,
   gear, poles) and tell the history of an event from the race FAQ, naming the
   origin, edition and date of every answer
+- Build a race-day plan for a target time or an index: arrival at each aid
+  station, the margin to each cut-off, and gels, water or drink and salt per
+  segment, with other fuel mixes for the same carbs per hour
 - Find races like a given one and compare two or three races side by side
 - Search the catalog by terrain, month, country and open registration
 - Read your profile, performance index and the finishes it rests on, stored

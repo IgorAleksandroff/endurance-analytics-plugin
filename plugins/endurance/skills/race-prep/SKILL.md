@@ -103,6 +103,28 @@ and keep their stated coverage and reasons for empty values.
   the same races as candidates); it applies at once and returns `undo` ids for
   `undo_plan_change`.
 
+## Race plan: aid station times and fuel
+
+A race plan is one race day, the numbers of the race page's Plan tab. It is not
+the season plan (`get_my_plan`); the platform writes no training plans.
+
+- `get_race_plan` (slug and season, or `my_race_id`) with `target_finish_s` or
+  `pi` (omit both: the athlete's own index, else 500; `pi_source` says which):
+  arrival at each aid station, `cutoff_margin_at_target_s`, and fuel per
+  segment (gels, food, water or drink, salt tabs), with race totals.
+  `cutoff_margin_at_target_s` comes from the time model at that target; the
+  field's margin from real finishers is `get_race_insights`.
+- `rhythm` says the fuel aloud ("a 40 g gel every 40 min"); `alternatives` are
+  other editor settings with the same carbs per hour. To try another mix, call
+  again with `fuel` (carbs per hour, gel size, water per hour, food, salt tab,
+  a catalog or own drink). `get_nutrition_catalog` lists the generic items.
+- `saved_plans` lists the athlete's own plans of the course; `plan_id` reads
+  one with its stations, settings and target.
+- `track_season` other than the race's season means the course of the latest
+  edition with a track; cut-offs of another edition are never used.
+  `no_aid_stations` and `times_unavailable` say what is missing: say so.
+- Quote every time, gel and margin as returned; never recompute them.
+
 ## Reading the course
 
 - **Flat-equivalent distance (`flat_km`)** is how far the course "feels" on
