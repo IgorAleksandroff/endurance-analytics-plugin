@@ -93,7 +93,7 @@ repository or the ZIP.
 ## Portal checklist
 
 - [ ] Organization: Apps Management Write access and verified developer identity.
-- [ ] Record the demo walkthrough (all 6 positive and 3 negative cases), put its URL in `review.demo_recording_url`, rebuild **without** `--allow-placeholder`.
+- [ ] Record the demo walkthrough (all 5 positive and 3 negative cases), put its URL in `review.demo_recording_url`, rebuild **without** `--allow-placeholder`.
 - [ ] Upload `dist/endurance-openai-<version>.zip` through **With MCP**; resolve metadata and skill findings (skill scans can take up to 2 hours).
 - [ ] MCPs → Connect `https://api.endurance-analytics.com/mcp`; authentication comes from `mcp.json` (OAuth, DCR).
 - [ ] Domain verification: serve the exact portal token as plain text at `https://api.endurance-analytics.com/.well-known/openai-apps-challenge` (currently 404), then **Verify Domain**.

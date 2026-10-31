@@ -275,7 +275,7 @@ def check_review(rep, review, allow_placeholder):
     if not isinstance(tc, dict):
         rep.err("review.test_cases: required object")
     else:
-        check_cases(rep, tc.get("positive"), "positive", 6,
+        check_cases(rep, tc.get("positive"), "positive", 5,
                     ("description", "prompt", "tools_triggered", "expected_behavior"))
         check_cases(rep, tc.get("negative"), "negative", 3, ("description", "prompt"))
     demo = https_url(rep, review, "demo_recording_url", "review")

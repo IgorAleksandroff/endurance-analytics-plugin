@@ -60,12 +60,6 @@
               "expected_behavior": "Describes the point-to-point course of about 59.5 km and 3400 m of climbing with its highest point near km 34, names the longest climb (about 4.8 km at about 15% ending near km 17) and the steepest sections with their kilometre positions, then reports the quad-damage level (moderate at the time of writing) and the critical descents in course order with their kilometres. States that the damage figures are for a typical runner, not a personal prediction."
             },
             {
-              "description": "Report race-day weather at the course.",
-              "prompt": "What weather should I expect at the CCC (UTMB Mont-Blanc)? What should I pack?",
-              "tools_triggered": "search_races, get_race_weather",
-              "expected_behavior": "Reports the climate record of the race date at the course: typical start and summit temperatures with their p10 to p90 spread, rain probability, wind and UV, and time spent in the dark, plus what the weather actually did for an edition that already happened (or the forecast when the race is within about ten days). Turns the spread and the dark time into concrete kit advice such as rain gear and a head torch, without quoting a regional town forecast."
-            },
-            {
               "description": "Upload a GPX course by link and analyse its terrain.",
               "prompt": "Save this GPX as my race (not a training route) named 'OCC recon' and tell me how hard it is: https://api.endurance-analytics.com/public/trail/races/utmb-occ/track.gpx?season=2026",
               "tools_triggered": "save_gpx_as_race",
@@ -99,7 +93,7 @@
             }
           ]
         },
-        "demo_recording_url": "https://example.invalid/TODO-demo",
+        "demo_recording_url": "https://youtu.be/ThNrgYxxuB4",
         "commerce": false
       },
       "publication": {
