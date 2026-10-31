@@ -38,6 +38,7 @@ already named a race or a course, skip the tour and help with that.
 | Trace one athlete checkpoint by checkpoint | `get_race_splits` |
 | Practical questions about a race (supporters, accommodation, bib pickup, pole rules) and the event's history, with source and date | `get_race` (`faq_index`, `story`), `get_race_faq` |
 | A race-day plan: arrival at each aid station, cut-off margins, gels, water and salt per segment for a target time | `get_race_plan`, `get_nutrition_catalog` |
+| Save their race plan or change a saved one: target time, fuel settings, their own gel or drink, an item at one station | `save_race_plan` |
 | A ready-made written race report | `get_race_report` |
 | How a race's field went: finish-time percentiles, drops and cut-off margins per checkpoint | `get_race_insights` |
 | Races like a given one, or races side by side | `find_similar_races`, `compare_races` |

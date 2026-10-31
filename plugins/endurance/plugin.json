@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "endurance-analytics",
-  "version": "2.5.0",
-  "description": "Trail race analytics from Endurance Analytics: search the race catalog, read course terrain (climbs, descents, technicality), pole advice, quad damage from descents, race-day weather at the course, results and athlete checkpoint splits, field insights and cut-off corridors, similar and side-by-side races, plus your own stored races, an editable season plan with undo, feedback and catalog requests, and GPX course upload with terrain analysis.",
+  "version": "2.6.0",
+  "description": "Trail and ultra race planning from Endurance Analytics: plan the season, build and save a race-day plan (predicted arrival at each aid station, cut-off margins and fuel per segment, with your own gels and drinks), break the course down (climbs, descents, technicality, poles, quad damage, weather at the course), then review results, checkpoint splits and how the field went. Plus your stored races, GPX course upload, feedback and catalog requests.",
   "author": {
     "name": "Endurance Analytics",
     "url": "https://endurance-analytics.com"
@@ -17,14 +17,16 @@
     "gpx",
     "terrain",
     "weather",
-    "analytics"
+    "analytics",
+    "race-plan",
+    "nutrition"
   ],
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "Endurance Analytics",
-        "shortDescription": "Trail race terrain & insights",
-        "longDescription": "Endurance Analytics turns trail race courses into race-day decisions. Ask about any race in the public catalog and get what the platform computed from its course track: flat-equivalent distance, the steepness profile, the longest and steepest climbs and descents with where they fall, surface and technical sections matched against OpenStreetMap, where running poles pay off, how much quad damage the descents inflict and where, and the weather at the course itself: the climate record of the race date, the forecast when the race is close, and what the weather did in past editions. A race-day plan gives the arrival time at each aid station, the margin to each cut-off and the gels, water and salt per segment for a target time or an index. Results of completed races are available for context, any athlete's race can be traced checkpoint by checkpoint, and the platform shows how the field went: finish-time percentiles, drops and cut-off margins per checkpoint, races similar to a given one and up to three races side by side. Practical race questions (supporters, bib pickup, gear, poles) are answered from the race FAQ with the source, edition and date of every answer.\n\nConnect your Endurance Analytics account to read your profile, performance index, stored races and season plan, check the calendar of your prioritised races, add, change and remove races in your season plan (every change can be undone for 90 days), send the team your feedback or ask for a missing race, and upload a GPX course (by link or file) as a race or a route for the same terrain, descent and pole analysis; your stored races come with climb, descent and altitudes.\n\nBuilt for trail and ultra runners preparing for a race, choosing between races, or checking a course they found online.\n\nLimitations: training data, endurance curves, heart-rate zones and readiness are not available through this integration. Deleting or editing your stored races, account settings and payments happen on the website; the assistant gives you a link. Uploading a GPX course uses one of your race slots. Course insights are computed for a reference runner, not personal predictions, and the assistant reports only numbers the platform returns. An Endurance Analytics account is required.",
+        "shortDescription": "Trail race planning & analysis",
+        "longDescription": "Endurance Analytics plans trail and ultra races from start to finish: the season, the race day and the review afterwards.\n\nPlan the season: search the public catalog by name, country, month, terrain and open registration, compare races side by side, find races like one you loved, and keep your season plan (races of the year and a wishlist): add, change and remove races, check the calendar of your prioritised races; every change can be undone for 90 days.\n\nPlan the race day: the platform predicts your finish time from your performance index (or takes your target), gives the arrival time at every aid station and the margin to each cut-off, and lays out the fuel per segment: gels, food, water or drink and salt tabs, with other fuel mixes for the same carbs per hour. Save the plan to your account, or change a saved one: target time, technicality, carbs per hour, gel size, fluid, your own gel or drink, a sandwich at one station, or your own checkpoints for a race without aid stations. The plan opens on the race page, where you can fine-tune it.\n\nKnow the course: flat-equivalent distance, the steepness profile, the longest and steepest climbs and descents with where they fall, surface and technical sections matched against OpenStreetMap, where running poles pay off, how much quad damage the descents inflict and where, and the weather at the course itself: the climate record of the race date, the forecast when the race is close, and what the weather did in past editions. Practical questions (supporters, bib pickup, gear, poles) are answered from the race FAQ with the source, edition and date of every answer.\n\nReview the race: results, any athlete's race checkpoint by checkpoint, and how the field went: finish-time percentiles, drops and cut-off margins per checkpoint.\n\nBring your own course: upload a GPX (by link or file) as a race or a route and get the same terrain, descent and pole analysis; your stored races come with climb, descent and altitudes. Send the team feedback or ask for a missing race or course track.\n\nBuilt for trail and ultra runners choosing races, preparing for one, or learning from the last.\n\nLimitations: training data, endurance curves, heart-rate zones and readiness are not available through this integration. Deleting your stored races or race plans, account settings and payments happen on the website; the assistant gives you a link. Uploading a GPX course uses one of your race slots, and a new race plan one race-plan slot unless that race already has one. Course insights are computed for a reference runner, and the assistant reports only numbers the platform returns. An Endurance Analytics account is required for your own data.",
         "developerName": "Endurance Analytics",
         "category": "Data & Analytics",
         "websiteURL": "https://endurance-analytics.com",
@@ -32,7 +34,7 @@
         "privacyPolicyURL": "https://endurance-analytics.com/en/privacy",
         "termsOfServiceURL": "https://endurance-analytics.com/en/terms",
         "defaultPrompt": [
-          "Help me prepare for the CCC: key climbs, descents, poles and race-day weather.",
+          "Plan my CCC: predicted time at each aid station, cut-off margins and what to eat and drink.",
           "Find trail races in Italy next summer that have a course track.",
           "Compare OCC, CCC and TDS 2026: which has the toughest descents and the tightest cut-offs?"
         ],
@@ -76,10 +78,10 @@
               "expected_behavior": "Finds the three 2026 races and shows one table with the catalog's values and each difference from the first race. Empty cells are reported as unknown with the reason the tool gives; no invented numbers and no verdict on which race is better for the athlete."
             },
             {
-              "description": "Build a race-day plan for a target time: aid station times, cut-off margins and fuel.",
-              "prompt": "Make me a race plan for the CCC 2026 for about 24 hours: when do I reach each aid station, how close am I to the cut-offs, and what should I eat and drink?",
-              "tools_triggered": "search_races, get_race_plan",
-              "expected_behavior": "Lists the aid stations in course order with the arrival time at a 24-hour finish and the margin to each cut-off, exactly as the tool returns them, and the fuel per segment and in total (gels, water or drink, salt) with the hourly rhythm. Says the margins come from the time model, not from how real finishers did, and that the plan is not saved; the athlete can adjust and save it on the race page. No time, margin or gel count recomputed by the assistant."
+              "description": "Build a race-day plan for a target time and save it to the account: aid station times, cut-off margins and fuel.",
+              "prompt": "Make me a race plan for the CCC 2026 for about 24 hours: when do I reach each aid station, how close am I to the cut-offs, and what should I eat and drink? Save it as 'CCC 24h'.",
+              "tools_triggered": "search_races, get_race_plan, save_race_plan",
+              "expected_behavior": "Lists the aid stations in course order with the arrival time at a 24-hour finish and the margin to each cut-off, exactly as the tool returns them, and the fuel per segment and in total (gels, water or drink, salt) with the hourly rhythm; says the margins come from the time model, not from how real finishers did. Then saves the plan named 'CCC 24h' with the same target and fuel settings, reports that it was saved (and that the race joined the wishlist), and gives the link to the plan on the race page, where it can be edited or deleted. No time, margin or gel count recomputed by the assistant."
             }
           ],
           "negative": [
@@ -102,7 +104,7 @@
       },
       "publication": {
         "countries": [],
-        "release_notes": "New: a race-day plan for a target time or your index — arrival at each aid station, the margin to each cut-off and gels, water or drink and salt per segment, with other fuel mixes for the same carbs per hour; plus the generic fuel catalog. Earlier: change your season plan from the chat with undo for 90 days, send feedback and ask for a missing race or course track."
+        "release_notes": "New: save a race-day plan to your account or change a saved one from the chat: target time, technicality, carbs per hour, gel size, fluid, your own gel or drink, items at one station and your own checkpoints. Earlier: the race-day plan itself (arrival at each aid station, cut-off margins, fuel per segment), season plan changes with undo, feedback and catalog requests."
       }
     }
   }

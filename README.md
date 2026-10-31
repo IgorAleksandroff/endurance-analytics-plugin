@@ -29,7 +29,9 @@ You need an Endurance Analytics account. Sign up at
   origin, edition and date of every answer
 - Build a race-day plan for a target time or an index: arrival at each aid
   station, the margin to each cut-off, and gels, water or drink and salt per
-  segment, with other fuel mixes for the same carbs per hour
+  segment, with other fuel mixes for the same carbs per hour, and save it to
+  your account or change a saved one (your own gels and drinks, an item at one
+  station, your own checkpoints for a race without aid stations)
 - Find races like a given one and compare two or three races side by side
 - Search the catalog by terrain, month, country and open registration
 - Read your profile, performance index and the finishes it rests on, stored
@@ -51,7 +53,9 @@ You need an Endurance Analytics account. Sign up at
 - Deleting or editing your stored races, settings and payments are
   website-only. When one
   of those is needed, the assistant gives you a link.
-- Uploading a GPX course uses one of your race slots.
+- Uploading a GPX course uses one of your race slots; a new race plan uses one
+  race-plan slot unless that race already has one. Deleting a race plan is
+  website-only.
 
 ## ChatGPT
 

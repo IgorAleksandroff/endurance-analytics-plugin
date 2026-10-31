@@ -124,6 +124,17 @@ the season plan (`get_my_plan`); the platform writes no training plans.
   edition with a track; cut-offs of another edition are never used.
   `no_aid_stations` and `times_unavailable` say what is missing: say so.
 - Quote every time, gel and margin as returned; never recompute them.
+- `save_race_plan` saves the plan to the athlete's account, only when they ask.
+  A new plan needs `race`, a `name` not yet in `saved_plans` and
+  `target_finish_s`; `plan_id` changes a saved plan and keeps what you leave out.
+  Pass the numbers of `get_race_plan` (an alternative's `fuel` settings), never
+  your own. `custom_items` puts the athlete's own gel, drink, food or salt tab in
+  place of the generic one at every station (a copy of a `get_nutrition_catalog`
+  item with their numbers); `extra_lines` adds a one-off item at one station
+  (`station_idx` from `get_race_plan.stations`); `stations` only for a race
+  without aid stations. A new plan takes one race-plan slot unless the race
+  already has one; the race joins the wishlist (`wishlist_undo` reverts that).
+  Give `web_url`: fine-tuning and deleting the plan happen on the race page.
 
 ## Reading the course
 

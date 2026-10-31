@@ -1,7 +1,7 @@
 {
   "name": "endurance",
-  "version": "2.5.0",
-  "description": "Trail race season planning, course breakdowns and race-day strategy with weather.",
+  "version": "2.6.0",
+  "description": "Trail race season planning, race-day plans with aid station times and fuel, course breakdowns and race reviews.",
   "author": {
     "name": "Endurance Analytics",
     "url": "https://endurance-analytics.com"

@@ -45,6 +45,7 @@ KNOWN_TOOLS = {
     "request_catalog_race",
     "get_my_requests",
     "get_race_plan",
+    "save_race_plan",
     "get_nutrition_catalog",
 }
 
