@@ -1,0 +1,277 @@
+{
+  "server_version": "3.8.0",
+  "tools": [
+    {
+      "name": "change_my_plan",
+      "title": "Change my season plan",
+      "read_only": false,
+      "destructive": true,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "check_season_plan",
+      "title": "Check season plan",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "compare_races",
+      "title": "Compare races",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "find_similar_races",
+      "title": "Find similar races",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_my_performance_index",
+      "title": "Performance index history",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_my_plan",
+      "title": "My season plan",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_my_plan_history",
+      "title": "My season plan history",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_my_profile",
+      "title": "Athlete profile",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_my_race",
+      "title": "My race detail",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_my_race_track",
+      "title": "My race track",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_my_races",
+      "title": "My races",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_my_requests",
+      "title": "My feedback and catalog requests",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_nutrition_catalog",
+      "title": "Fuel catalog",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_race",
+      "title": "Race detail",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_race_course_segments",
+      "title": "Race course segments",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_race_faq",
+      "title": "Race FAQ",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_race_insights",
+      "title": "Race field insights and corridor",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_race_plan",
+      "title": "Race plan",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_race_pole_advice",
+      "title": "Running poles for this race",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_race_quad_damage",
+      "title": "Quadriceps damage risk for this race",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_race_rankings",
+      "title": "Race rankings",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_race_report",
+      "title": "Race report (Markdown)",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_race_results",
+      "title": "Race results",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_race_splits",
+      "title": "Athlete splits by checkpoint",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_race_terrain_summary",
+      "title": "Race terrain",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "get_race_weather",
+      "title": "Race weather",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "request_catalog_race",
+      "title": "Request a race for the catalog",
+      "read_only": false,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "save_gpx_as_race",
+      "title": "Upload a GPX course",
+      "read_only": false,
+      "destructive": false,
+      "open_world": true,
+      "app_only": false
+    },
+    {
+      "name": "save_race_plan",
+      "title": "Save my race plan",
+      "read_only": false,
+      "destructive": true,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "search_races",
+      "title": "Search races",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "send_feedback",
+      "title": "Send feedback to Endurance Analytics",
+      "read_only": false,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "show_card",
+      "title": "Show a chart",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": false
+    },
+    {
+      "name": "show_card_data",
+      "title": "Chart data",
+      "read_only": true,
+      "destructive": false,
+      "open_world": false,
+      "app_only": true
+    },
+    {
+      "name": "undo_plan_change",
+      "title": "Undo season plan changes",
+      "read_only": false,
+      "destructive": true,
+      "open_world": false,
+      "app_only": false
+    }
+  ]
+}

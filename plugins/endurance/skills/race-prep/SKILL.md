@@ -93,6 +93,11 @@ and keep their stated coverage and reasons for empty values.
 - `compare_races` (2 or 3 keys): one table with the difference from the first
   race. Empty cells have reasons; pass them on. It is not a verdict on which
   race is better for the athlete.
+- `get_race_rankings` ranks catalog races by one metric (climbing, altitude,
+  DNF rate, tight cut-off, longest aid gap, field) with seasons, countries,
+  series and distance as filters. Quote its conditions and the races it
+  excluded by reason; a place says nothing about how hard the race is for the
+  athlete.
 - `search_races` also filters by months, nations, numeric ranges, track and
   results, and `registration_open`, and sorts; `total` is the count before
   paging. `get_race` and the search items carry the registration status the

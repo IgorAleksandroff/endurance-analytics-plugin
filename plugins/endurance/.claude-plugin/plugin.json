@@ -1,7 +1,8 @@
 {
-  "name": "endurance",
-  "version": "2.6.0",
-  "description": "Trail race season planning, race-day plans with aid station times and fuel, course breakdowns and race reviews.",
+  "name": "endurance-analytics",
+  "displayName": "Endurance Analytics",
+  "version": "2.7.0",
+  "description": "Trail and ultra race planning: the season, a race-day plan with aid station times and fuel, course breakdowns with weather, and race reviews.",
   "author": {
     "name": "Endurance Analytics",
     "url": "https://endurance-analytics.com"
@@ -9,5 +10,15 @@
   "homepage": "https://endurance-analytics.com/en/connect",
   "repository": "https://github.com/IgorAleksandroff/endurance-analytics-plugin",
   "license": "MIT",
-  "keywords": ["running", "trail-running", "ultra", "race", "gpx", "terrain", "weather", "analytics"]
+  "keywords": [
+    "trail-running",
+    "ultra",
+    "race",
+    "race-plan",
+    "nutrition",
+    "gpx",
+    "terrain",
+    "weather",
+    "analytics"
+  ]
 }

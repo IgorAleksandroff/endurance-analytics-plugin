@@ -2,7 +2,7 @@
 
 Material for the OpenAI plugin portal. Not shipped in the ZIP.
 
-- Package: `dist/endurance-openai-<version>.zip`, built by `scripts/build-openai-zip.sh`.
+- Package: `dist/endurance-openai-<version>.zip`, built by `scripts/build.sh`.
 - MCP server: `https://api.endurance-analytics.com/mcp`, Streamable HTTP, OAuth 2.1 with DCR and PKCE.
 
 ## Tool annotations
@@ -42,7 +42,16 @@ Every tool must carry explicit `readOnlyHint`, `destructiveHint` and
 | `get_my_requests` | true | false | false | Reads the athlete's own feedback and catalog requests with status and the team's reply. |
 | `get_race_plan` | true | false | false | Computes a race-day plan (aid station times, cut-off margins, fuel per segment) from the stored course and aid stations of a catalog race or the athlete's own course, and reads the athlete's own saved race plans. Nothing is written. |
 | `get_nutrition_catalog` | true | false | false | Reads the platform's small generic fuel catalog (gels, food, drinks, salt tabs). Read only. |
+| `get_race_rankings` | true | false | false | Ranks catalog races by one metric from facts the platform stores for each edition (course, results, cut-offs). Read only, bounded dataset. |
+| `show_card` | true | false | false | Returns a reference to a chart of the platform's own data (a catalog race, the athlete's own race or season plan) for the MCP Apps view; the chart is drawn from the same stored data as the read tools. Nothing is written; no access outside the platform. |
 | `save_race_plan` | false | true | false | Creates the athlete's own race plan of a catalog race, or overwrites one of their saved race plans (`plan_id`) with new settings and fuel lines, through the same checks and quota as the website's plan editor; a new plan uses one race-plan slot. Destructive because a replace overwrites the saved plan (no undo; the athlete can edit it again on the website). Also adds the race to the season plan wishlist, which `undo_plan_change` reverts. Deleting a plan is website-only. No access outside the platform. |
+
+`show_card_data` (readOnly true, destructive false, openWorld false) is
+app-only (`_meta.ui.visibility: ["app"]`): the chart view of `show_card` calls
+it through the host for the chart's data; the model never sees it. The view
+(`ui://endurance-analytics/card.html`) loads its script only from
+`https://endurance-analytics.com` (`resourceDomains`) and makes no other
+network requests (`connectDomains` is empty).
 
 ## Test cases
 

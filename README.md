@@ -1,85 +1,44 @@
 # Endurance Analytics plugin
 
-Trail race analytics from [Endurance Analytics](https://endurance-analytics.com)
-in your AI assistant: prepare for a race from its real course data, and upload
-GPX courses to get their terrain analysed.
+<!-- listing:start (scripts/sync-listing.py) -->
+Endurance Analytics plans trail and ultra races: the season, the race day and the review afterwards.
 
-One package serves ChatGPT and Claude Code. It connects to the remote MCP
-server `https://api.endurance-analytics.com/mcp` and adds three skills:
-getting started, race preparation and GPX courses.
+Season: search the public race catalog by name, country, month, terrain and open registration, rank and compare races, find races like one you loved, and keep your season plan. Every change can be undone for 90 days.
 
+Race day: arrival at every aid station and the margin to each cut-off for your target time or performance index, with gels, food, drink and salt per segment. Save the plan with your own fuel and fine-tune it on the race page.
+
+Course: flat-equivalent distance, key climbs and descents and where they fall, technical sections, where poles pay off, quad damage and the weather at the course itself. Practical questions are answered from the race FAQ with source and date.
+
+Review: results, any athlete checkpoint by checkpoint, and how the field went. Upload a GPX for the same analysis. Profiles, maps and results come as the website's charts right in the chat.
+
+Limitations: no training data, heart-rate zones or readiness here. Deleting races or plans, settings and payments happen on the website. A GPX upload uses a race slot, a new race plan a race-plan slot. Numbers come only from the platform; course insights are for a reference runner. Your own data needs an Endurance Analytics account.
+
+Official listings: [ChatGPT](https://chatgpt.com/plugins/plugin_asdk_app_6ae6286b0b008191850171a45207127f) · [Claude](https://claude.ai/directory/endurance-analytics)
+<!-- listing:end -->
+
+One plugin for ChatGPT and Claude: the same folder `plugins/endurance`, the
+same skills and the same remote MCP server `https://api.endurance-analytics.com/mcp`.
 You need an Endurance Analytics account. Sign up at
 [endurance-analytics.com](https://endurance-analytics.com).
 
-## What it can do
-
-- Search the public race catalog by name, country, race type and dates
-- Explain a course: flat-equivalent distance, climbs and descents with where
-  they fall, highest point, surface and technical sections
-- Plan descents: how much quad damage they inflict and where to hold back
-- Advise on running poles: whether to carry them and where to use them
-- Check race-day weather at the course: the climate record of that date, the
-  forecast when the race is close, and what the weather did once it is run
-- Read results of completed races, and trace any athlete checkpoint by
-  checkpoint: arrival times, positions and segment times from the stored splits
-- See how the field of a race went: finish-time percentiles, drops and cut-off
-  margins per checkpoint, and the corridor of finishers around a target time
-- Answer practical race questions (supporters, accommodation, bib pickup,
-  gear, poles) and tell the history of an event from the race FAQ, naming the
-  origin, edition and date of every answer
-- Build a race-day plan for a target time or an index: arrival at each aid
-  station, the margin to each cut-off, and gels, water or drink and salt per
-  segment, with other fuel mixes for the same carbs per hour, and save it to
-  your account or change a saved one (your own gels and drinks, an item at one
-  station, your own checkpoints for a race without aid stations)
-- Find races like a given one and compare two or three races side by side
-- Search the catalog by terrain, month, country and open registration
-- Read your profile, performance index and the finishes it rests on, stored
-  races and season plan, and check the calendar of your prioritised races
-- Add, change and remove races in your season plan (the wishlist is its Wish
-  tab); every change is kept 90 days in the plan history and can be undone
-- Send the team your idea, bug report or complaint, or ask for a missing race
-  or course track, and see the answers
-- Upload a GPX course (by link or file) as a race or a route and analyse its
-  terrain, its descents and poles, the same way as a catalog race, and see climb,
-  descent and altitudes of all your stored races at once
-
-## What it cannot do
-
-- Training data, endurance curves, heart-rate zones and readiness are not
-  available through this integration. They stay on the website.
-- A performance index computed from races imported from Strava is not shown
-  to the assistant either; it gives you a link to the index page instead.
-- Deleting or editing your stored races, settings and payments are
-  website-only. When one
-  of those is needed, the assistant gives you a link.
-- Uploading a GPX course uses one of your race slots; a new race plan uses one
-  race-plan slot unless that race already has one. Deleting a race plan is
-  website-only.
-
 ## ChatGPT
 
-Directory listing: coming soon.
+Install from the ChatGPT directory:
+[Endurance Analytics in ChatGPT](https://chatgpt.com/plugins/plugin_asdk_app_6ae6286b0b008191850171a45207127f).
+Select **Connect** and sign in to Endurance Analytics in the window that opens.
 
-Until it is published, add the server yourself (account and workspace policies
-apply to custom MCP servers):
+## Claude
 
-1. Open [ChatGPT Plugins](https://chatgpt.com/plugins), select the plus button,
-   then **Add custom MCP server**.
-2. Name it Endurance Analytics and enter the URL
-   `https://api.endurance-analytics.com/mcp`.
-3. Choose OAuth authentication, confirm the warning and select
-   **Create as a plugin**.
-4. Sign in to Endurance Analytics in the window that opens and approve access.
-
-The custom server gives you the tools; the skills arrive with the directory
-listing.
+On claude.ai and in Claude Desktop, add the connector from the directory:
+[Endurance Analytics in Claude](https://claude.ai/directory/endurance-analytics).
+Select **Connect** and sign in to Endurance Analytics. The connector gives the
+tools; the skills of this plugin come with Claude Code below.
 
 ## Claude Code
 
 ```
 /plugin marketplace add IgorAleksandroff/endurance-analytics-plugin
-/plugin install endurance@endurance-analytics
+/plugin install endurance-analytics@endurance-analytics
 ```
 
 Then run `/mcp` and follow the browser sign-in. You approve what the assistant
@@ -100,47 +59,53 @@ The plugin ships no secrets: its MCP configuration contains only the endpoint.
 ## Repository layout
 
 ```
-.claude-plugin/marketplace.json     Claude Code marketplace
-plugins/endurance/
-  plugin.json, mcp.json, assets/    OpenAI plugin (Agent Plugins format)
-  .claude-plugin/plugin.json        Claude Code plugin manifest
-  .mcp.json                         Claude Code MCP configuration
+listing.json                        THE listing text: name, descriptions, prompts, release notes, data use
+agent-surface.json                  The server's tool list, copied from the backend's docs/api/agent_surface.json
+connector-listing.md                Generated: fields to paste into the Claude connector listing
+.claude-plugin/marketplace.json     Generated: Claude Code marketplace
+plugins/endurance/                  The plugin, one folder for both directories
+  README.md                         Generated: the listing page in Anthropic's directory
+  plugin.json, mcp.json, assets/    OpenAI manifest (shared fields generated) and MCP config
+  .claude-plugin/plugin.json        Generated: Claude manifest
+  .mcp.json                         Claude MCP config (same URL; the validator checks it)
   skills/                           Skills shared by both
 scripts/
-  validate-openai.py                Checks the OpenAI package
-  build-openai-zip.sh               Validates and builds dist/endurance-openai-<version>.zip
+  sync-listing.py                   Writes every generated file; --check fails when one is stale
+  validate-openai.py                Checks the OpenAI package and the tool sync
+  build.sh                          sync --check, validators, then dist/endurance-{openai,claude}-<version>.zip
 review-notes.md                     OpenAI review material (not in the ZIP)
 ```
 
-Build the OpenAI package:
-
 ```bash
-scripts/build-openai-zip.sh                      # release build
-scripts/build-openai-zip.sh --allow-placeholder  # draft, while the demo video URL is a placeholder
+scripts/sync-listing.py                      # after editing listing.json
+scripts/build.sh                             # release build of both packages
+scripts/build.sh --allow-placeholder         # draft, while the demo video URL is a placeholder
 ```
-
-Bump the version in `plugins/endurance/plugin.json`,
-`plugins/endurance/.claude-plugin/plugin.json` and
-`.claude-plugin/marketplace.json` together; the validator checks they match.
 
 ## Keeping the plugin in sync with the server
 
-The MCP server lives in the backend (`internal/mcpserver`). Whenever a tool is
-added, removed or renamed, or its inputs, outputs, annotations or limits change,
-update this repository in the same piece of work:
+The MCP server lives in the backend (`internal/mcpserver`). Its tool list is
+exported to `docs/api/agent_surface.json` by
+`go test ./internal/mcpserver -run TestAgentSurfaceDump -update-agent-surface`
+(the test fails while the export is stale). Whenever a tool is added, removed or
+renamed, or its inputs, outputs, annotations or limits change:
 
-1. `skills/*/SKILL.md`: every mention of the tool, its parameters and its fields.
-2. `scripts/validate-openai.py`: `KNOWN_TOOLS`.
-3. `plugin.json` → `review.test_cases`, and `review-notes.md` (annotation
-   justifications, test cases). A test case must still run on a fresh reviewer
-   account.
-4. `README.md` → "What it can do" / "What it cannot do"; `plugin.json` →
-   `longDescription` and `defaultPrompt`; `marketplace.json` description.
-5. Bump the version in all three manifests, run the validator, commit and push.
-6. ChatGPT: tool changes reach the listing through OpenAI's daily rescan, but
-   new tools stay hidden until approved, and anything inside the package
-   (skills, metadata) needs a new ZIP: build it and upload it as a new version
-   in the plugin portal.
+1. `scripts/sync-listing.py --surface-from <back>/docs/api/agent_surface.json`.
+2. The validator then names what is missing: every tool in `skills/*/SKILL.md`
+   and in the `review-notes.md` annotation table with the server's hints.
+3. `listing.json`: description, prompts and release notes if the change is
+   visible to the athlete; bump `version`; run `scripts/sync-listing.py`.
+4. `plugin.json` → `review.test_cases` if a case changes; a case must still run
+   on a fresh reviewer account.
+5. `scripts/build.sh`, commit and push: the Claude directory picks up the push.
+6. ChatGPT: upload `dist/endurance-openai-<version>.zip` as a new version in the
+   plugin portal. Tool changes reach ChatGPT through the daily rescan, new tools
+   stay hidden until approved.
+7. Claude connector: paste `connector-listing.md` into the listing when its
+   tagline, description or tool names changed.
+8. The website's agent texts (`/connect`, `agents.md`, `llms.txt`, server card):
+   `npm run sync:agent-surface` in the front, whose tests check them against the
+   same export and `listing.json`.
 
 Data obtained from Strava (trainings, curves, zones, readiness) must never be
 exposed through the tools or described in the skills.

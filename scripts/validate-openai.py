@@ -15,39 +15,10 @@ from pathlib import Path
 PLUGIN_SCHEMA = "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
 MCP_SCHEMA = "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json"
 
-KNOWN_TOOLS = {
-    "get_my_profile",
-    "get_my_performance_index",
-    "get_my_races",
-    "get_my_race",
-    "get_my_race_track",
-    "get_my_plan",
-    "check_season_plan",
-    "search_races",
-    "get_race",
-    "get_race_results",
-    "get_race_splits",
-    "get_race_terrain_summary",
-    "get_race_pole_advice",
-    "get_race_quad_damage",
-    "get_race_course_segments",
-    "get_race_weather",
-    "get_race_faq",
-    "get_race_report",
-    "get_race_insights",
-    "find_similar_races",
-    "compare_races",
-    "save_gpx_as_race",
-    "change_my_plan",
-    "get_my_plan_history",
-    "undo_plan_change",
-    "send_feedback",
-    "request_catalog_race",
-    "get_my_requests",
-    "get_race_plan",
-    "save_race_plan",
-    "get_nutrition_catalog",
-}
+# The server's tool list, exported by the backend (docs/api/agent_surface.json) and copied by
+# scripts/sync-listing.py --surface-from. App-only tools are called by an MCP Apps view, never by the model.
+SURFACE = json.loads((Path(__file__).resolve().parent.parent / "agent-surface.json").read_text(encoding="utf-8"))
+KNOWN_TOOLS = {t["name"] for t in SURFACE["tools"] if not t["app_only"]}
 
 CATEGORIES = {
     "Productivity", "Creativity", "Developer Tools", "Business & Operations",
@@ -63,7 +34,7 @@ FORBIDDEN_KEYS = {
 # Paths that must not be shipped in the OpenAI ZIP (relative to the plugin root).
 FORBIDDEN_PATHS = [".app.json", "hooks", "hooks.json", "commands", "agents", ".codex-plugin"]
 
-# Excluded from the ZIP by build-openai-zip.sh; the validator must mirror it.
+# Excluded from the OpenAI ZIP by build.sh; the validator must mirror it.
 ZIP_EXCLUDES = {".claude-plugin", ".mcp.json", ".DS_Store", "dist"}
 
 PLACEHOLDER = re.compile(r"example\.(invalid|com)|TODO", re.IGNORECASE)
@@ -362,15 +333,18 @@ def check_mcp(rep, root):
     return url
 
 
-def check_claude_side(rep, root, openai_url, version):
+def check_claude_side(rep, root, openai_url, version, name):
     claude_mcp = load_json(root / ".mcp.json", rep)
     if claude_mcp is not None:
         urls = {s.get("url") for s in claude_mcp.get("mcpServers", {}).values()}
         if urls != {openai_url}:
             rep.err(f".mcp.json: server URL {sorted(map(str, urls))} differs from mcp.json {openai_url}")
     claude_manifest = load_json(root / ".claude-plugin" / "plugin.json", rep)
-    if claude_manifest is not None and claude_manifest.get("version") != version:
-        rep.err(f".claude-plugin/plugin.json: version {claude_manifest.get('version')} != {version}")
+    if claude_manifest is not None:
+        if claude_manifest.get("version") != version:
+            rep.err(f".claude-plugin/plugin.json: version {claude_manifest.get('version')} != {version}")
+        if claude_manifest.get("name") != name:
+            rep.err(f".claude-plugin/plugin.json: name {claude_manifest.get('name')} != {name}: one plugin, one name")
     market = load_json(root.parent.parent / ".claude-plugin" / "marketplace.json", rep)
     if market is not None:
         for p in market.get("plugins", []):
@@ -474,7 +448,12 @@ def check_tool_sync(rep, root):
     if not notes.exists():
         rep.note("review-notes.md not found next to the repo root; tool-sync check skipped")
         return
-    annotated = set(re.findall(r"^\| `([a-z_]+)` \| (?:true|false) \|", notes.read_text(encoding="utf-8"), re.M))
+    rows = re.findall(r"^\| `([a-z_]+)` \| (true|false) \| (true|false) \| (true|false) \|", notes.read_text(encoding="utf-8"), re.M)
+    annotated = {r[0] for r in rows}
+    hints = {t["name"]: (t["read_only"], t["destructive"], t["open_world"]) for t in SURFACE["tools"]}
+    for name, *flags in rows:
+        if name in hints and tuple(f == "true" for f in flags) != hints[name]:
+            rep.err(f"review-notes.md: {name} hints {flags} differ from the server {hints[name]}")
     missing = KNOWN_TOOLS - annotated
     extra = annotated - KNOWN_TOOLS
     if missing:
@@ -483,7 +462,7 @@ def check_tool_sync(rep, root):
         rep.err(f"review-notes.md annotates unknown tools: {sorted(extra)}")
     skills_mentioned = set()
     for path in sorted((root / "skills").glob("*/SKILL.md")):
-        skills_mentioned.update(re.findall(r"`((?:get|save|search|find|check|compare|change|undo|send|request)_[a-z_]+)`", path.read_text(encoding="utf-8")))
+        skills_mentioned.update(re.findall(r"`((?:get|save|search|find|check|compare|change|undo|send|request|show)_[a-z_]+)`", path.read_text(encoding="utf-8")))
     unmentioned = KNOWN_TOOLS - skills_mentioned
     invented = skills_mentioned - KNOWN_TOOLS
     if unmentioned:
@@ -524,7 +503,7 @@ def main():
 
     name = check_manifest(rep, root, manifest, args.allow_placeholder)
     url = check_mcp(rep, root)
-    check_claude_side(rep, root, url, manifest.get("version"))
+    check_claude_side(rep, root, url, manifest.get("version"), name)
     check_skills(rep, root, name)
     check_tool_sync(rep, root)
     mcp_doc = load_json(root / "mcp.json", Report()) or {}
