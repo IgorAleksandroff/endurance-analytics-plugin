@@ -121,8 +121,9 @@ the season plan (`get_my_plan`); the platform writes no training plans.
   other editor settings with the same carbs per hour. To try another mix, call
   again with `fuel` (carbs per hour, gel size, water per hour, food, salt tab,
   a catalog or own drink). `get_nutrition_catalog` lists the generic items.
-- `saved_plans` lists the athlete's own plans of the course; `plan_id` reads
-  one with its stations, settings and target.
+- `saved_plans` lists the athlete's own plans of the course, latest change
+  first; `plan_id` reads one with its stations, settings and target. "My plan"
+  without a name is the first of them, the plan the race page opens.
 - `track_season` other than the race's season means the course of the latest
   edition with a track; cut-offs of another edition are never used.
   `no_aid_stations` and `times_unavailable` say what is missing: say so.
@@ -133,7 +134,12 @@ the season plan (`get_my_plan`); the platform writes no training plans.
   Pass the numbers of `get_race_plan` (an alternative's `fuel` settings), never
   your own. `custom_items` puts the athlete's own gel, drink, food or salt tab in
   place of the generic one at every station (a copy of a `get_nutrition_catalog`
-  item with their numbers); `extra_lines` adds a one-off item at one station
+  item with their numbers). An own food is counted by its `carbs_g`: `food_rate`
+  is the food's carbs per hour (0, 20 or 40 g) and the gels cover the rest of
+  `carb_rate`; food starts at `food_start_h` (0-3, default 3: gels alone before
+  the third hour; `food_start_h` and `food_g_per_hour` in `get_race_plan.fuel`).
+  Sodium of an own gel or food comes off the salt tabs. `extra_lines` adds a
+  one-off item at one station
   (`station_idx` from `get_race_plan.stations`); `stations` only for a race
   without aid stations. A new plan takes one race-plan slot unless the race
   already has one; the race joins the wishlist (`wishlist_undo` reverts that).
