@@ -3,19 +3,20 @@
 # One folder (plugins/endurance) makes both packages; they differ only in the other platform's manifests:
 #   dist/endurance-openai-<version>.zip  OpenAI plugin portal (its portal reads a stray Claude manifest and warns)
 #   dist/endurance-claude-<version>.zip  claude.ai Customize > Plugins > Upload (the directory itself reads GitHub)
-# Usage: scripts/build.sh [--allow-placeholder]
+# Usage: [ENDURANCE_BACK=<backend checkout>] scripts/build.sh [--allow-placeholder]
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PLUGIN="$ROOT/plugins/endurance"
+EXPORT="${ENDURANCE_BACK:-$ROOT/../endurance-analytics-back}/docs/api/agent_surface.json"
 
+cmp "$EXPORT" "$ROOT/agent-surface.json" || {
+  echo "agent-surface.json differs from $EXPORT: run scripts/sync-listing.py --surface-from $EXPORT" >&2
+  exit 1
+}
 python3 -I "$ROOT/scripts/sync-listing.py" --check
 python3 -I "$ROOT/scripts/validate-openai.py" "$@" "$PLUGIN"
-if command -v claude >/dev/null; then
-  claude plugin validate "$PLUGIN"
-else
-  echo "claude CLI not found: Claude-side validation skipped" >&2
-fi
+claude plugin validate "$PLUGIN"
 
 VERSION="$(python3 -I -c 'import json, sys; print(json.load(open(sys.argv[1]))["version"])' "$ROOT/listing.json")"
 mkdir -p "$ROOT/dist"

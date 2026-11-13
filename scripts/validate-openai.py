@@ -460,9 +460,10 @@ def check_tool_sync(rep, root):
         rep.err(f"review-notes.md annotation table is missing tools: {sorted(missing)}")
     if extra:
         rep.err(f"review-notes.md annotates unknown tools: {sorted(extra)}")
+    verbs = "|".join(sorted({t["name"].split("_")[0] for t in SURFACE["tools"]}))
     skills_mentioned = set()
     for path in sorted((root / "skills").glob("*/SKILL.md")):
-        skills_mentioned.update(re.findall(r"`((?:get|save|search|find|check|compare|change|undo|send|request|show)_[a-z_]+)`", path.read_text(encoding="utf-8")))
+        skills_mentioned.update(re.findall(rf"`((?:{verbs})_[a-z_]+)`", path.read_text(encoding="utf-8")))
     unmentioned = KNOWN_TOOLS - skills_mentioned
     invented = skills_mentioned - KNOWN_TOOLS
     if unmentioned:
@@ -482,8 +483,11 @@ def check_package(rep, root, docs):
         if path.is_symlink():
             rep.err(f"{rel}: symlinks are not allowed")
         if path.suffix in {".md", ".json", ".yaml", ".yml", ".txt"}:
-            if SECRET.search(path.read_text(encoding="utf-8")):
+            raw = path.read_text(encoding="utf-8")
+            if SECRET.search(raw):
                 rep.err(f"{rel}: looks like it contains a secret")
+            if path.suffix == ".md" and CLAUDE_WORD.search(raw):
+                rep.err(f"{rel}: mentions Claude; use neutral wording")
 
 
 def main():

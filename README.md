@@ -11,7 +11,7 @@ Course: flat-equivalent distance, key climbs and descents and where they fall, t
 
 Review: results, any athlete checkpoint by checkpoint, and how the field went. Upload a GPX for the same analysis. Profiles, maps and results come as the website's charts right in the chat.
 
-Limitations: no training data, heart-rate zones or readiness here. Deleting races or plans, settings and payments happen on the website. A GPX upload uses a race slot, a new race plan a race-plan slot. Numbers come only from the platform; course insights are for a reference runner. Your own data needs an Endurance Analytics account.
+Limitations: no training data, heart-rate zones or readiness here. Deleting races or race plans, settings and payments happen on the website. A GPX upload uses a race slot, a new race plan a race-plan slot. Numbers come only from the platform; course insights are for a reference runner. Your own data needs an Endurance Analytics account.
 
 Official listings: [ChatGPT](https://chatgpt.com/plugins/plugin_asdk_app_6ae6286b0b008191850171a45207127f) · [Claude](https://claude.ai/directory/endurance-analytics)
 <!-- listing:end -->
@@ -40,6 +40,9 @@ tools; the skills of this plugin come with Claude Code below.
 /plugin marketplace add IgorAleksandroff/endurance-analytics-plugin
 /plugin install endurance-analytics@endurance-analytics
 ```
+
+Installed it before 2.7.0 as `endurance`? Run
+`/plugin uninstall endurance@endurance-analytics` first: the plugin was renamed.
 
 Then run `/mcp` and follow the browser sign-in. You approve what the assistant
 may access on a consent screen; the token refreshes itself afterwards.
@@ -97,15 +100,19 @@ renamed, or its inputs, outputs, annotations or limits change:
    visible to the athlete; bump `version`; run `scripts/sync-listing.py`.
 4. `plugin.json` → `review.test_cases` if a case changes; a case must still run
    on a fresh reviewer account.
-5. `scripts/build.sh`, commit and push: the Claude directory picks up the push.
+5. `scripts/build.sh` (checks `agent-surface.json` against the backend checkout,
+   `ENDURANCE_BACK`, default `../endurance-analytics-back`). Try
+   `dist/endurance-claude-<version>.zip` on claude.ai (Customize > Plugins >
+   Upload), then commit and push: the Claude directory picks up the push.
 6. ChatGPT: upload `dist/endurance-openai-<version>.zip` as a new version in the
    plugin portal. Tool changes reach ChatGPT through the daily rescan, new tools
    stay hidden until approved.
 7. Claude connector: paste `connector-listing.md` into the listing when its
    tagline, description or tool names changed.
 8. The website's agent texts (`/connect`, `agents.md`, `llms.txt`, server card):
-   `npm run sync:agent-surface` in the front, whose tests check them against the
-   same export and `listing.json`.
+   `npm run sync:agent-surface` in the front. Its test checks the tool table and
+   version of `agents.md`; the capability lists of `/connect` and `llms.txt` are
+   written by hand, read them.
 
 Data obtained from Strava (trainings, curves, zones, readiness) must never be
 exposed through the tools or described in the skills.

@@ -148,8 +148,9 @@ def refresh_surface(src):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--check", action="store_true")
-    parser.add_argument("--surface-from")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--check", action="store_true")
+    mode.add_argument("--surface-from")
     args = parser.parse_args()
     if args.surface_from:
         refresh_surface(args.surface_from)

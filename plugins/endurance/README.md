@@ -10,7 +10,7 @@ Course: flat-equivalent distance, key climbs and descents and where they fall, t
 
 Review: results, any athlete checkpoint by checkpoint, and how the field went. Upload a GPX for the same analysis. Profiles, maps and results come as the website's charts right in the chat.
 
-Limitations: no training data, heart-rate zones or readiness here. Deleting races or plans, settings and payments happen on the website. A GPX upload uses a race slot, a new race plan a race-plan slot. Numbers come only from the platform; course insights are for a reference runner. Your own data needs an Endurance Analytics account.
+Limitations: no training data, heart-rate zones or readiness here. Deleting races or race plans, settings and payments happen on the website. A GPX upload uses a race slot, a new race plan a race-plan slot. Numbers come only from the platform; course insights are for a reference runner. Your own data needs an Endurance Analytics account.
 
 ## Use it
 

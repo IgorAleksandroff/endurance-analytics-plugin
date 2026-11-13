@@ -10,7 +10,7 @@
     "Race day: arrival at every aid station and the margin to each cut-off for your target time or performance index, with gels, food, drink and salt per segment. Save the plan with your own fuel and fine-tune it on the race page.",
     "Course: flat-equivalent distance, key climbs and descents and where they fall, technical sections, where poles pay off, quad damage and the weather at the course itself. Practical questions are answered from the race FAQ with source and date.",
     "Review: results, any athlete checkpoint by checkpoint, and how the field went. Upload a GPX for the same analysis. Profiles, maps and results come as the website's charts right in the chat.",
-    "Limitations: no training data, heart-rate zones or readiness here. Deleting races or plans, settings and payments happen on the website. A GPX upload uses a race slot, a new race plan a race-plan slot. Numbers come only from the platform; course insights are for a reference runner. Your own data needs an Endurance Analytics account."
+    "Limitations: no training data, heart-rate zones or readiness here. Deleting races or race plans, settings and payments happen on the website. A GPX upload uses a race slot, a new race plan a race-plan slot. Numbers come only from the platform; course insights are for a reference runner. Your own data needs an Endurance Analytics account."
   ],
   "dataUse": "The plugin sends your questions' parameters (race, season, target time, fuel settings, a GPX link or file) to the Endurance Analytics server at https://api.endurance-analytics.com/mcp under your own account, signed in with OAuth. It stores nothing itself. Data imported from Strava is never sent to the assistant.",
   "defaultPrompt": [
