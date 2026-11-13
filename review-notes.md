@@ -18,7 +18,7 @@ Every tool must carry explicit `readOnlyHint`, `destructiveHint` and
 | `get_my_race` | true | false | false | Reads one of the athlete's own races and its stored terrain analysis. |
 | `get_my_race_track` | true | false | false | Reads the stored, resampled track of one of the athlete's own races. |
 | `get_my_plan` | true | false | false | Reads the athlete's own season plan (races they want, applied for, paid for, ran or skipped) from the platform database. Changes nothing; Strava-imported races are not included. |
-| `check_season_plan` | true | false | false | Checks the calendar of the athlete's prioritised races against fixed rules computed by the service; candidates are only simulated, nothing is stored. |
+| `check_season_plan` | true | false | false | Checks the calendar of the athlete's prioritised races against fixed rules computed by the service and returns lead-in windows before each A race; candidates are only simulated, nothing is stored. |
 | `search_races` | true | false | false | Searches the platform's own race catalog. Bounded dataset, no web search. |
 | `get_race` | true | false | false | Reads one race from the platform's catalog, including its event history and the table of contents of its FAQ. |
 | `get_race_results` | true | false | false | Reads stored results of a catalog race. No athlete ids or photos are returned. |

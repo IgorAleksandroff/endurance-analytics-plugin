@@ -43,7 +43,7 @@ already named a race or a course, skip the tour and help with that.
 | How a race's field went: finish-time percentiles, drops and cut-off margins per checkpoint | `get_race_insights` |
 | Races like a given one, or races side by side | `find_similar_races`, `compare_races` |
 | Their own profile, index (and what it rests on: their catalog finishes), races (with climbing, descent and altitudes), season plan | `get_my_profile`, `get_my_performance_index`, `get_my_races`, `get_my_race`, `get_my_race_track`, `get_my_plan` |
-| Check the calendar of their prioritised races | `check_season_plan` |
+| Check the calendar of their prioritised races, windows for lead-in races before an A race | `check_season_plan` |
 | Add, change or remove races in their season plan (the wishlist is its Wish tab), or undo a change | `change_my_plan`, `get_my_plan_history`, `undo_plan_change` |
 | Send the team an idea, bug report or complaint, ask for a missing race or course track, see the answers | `send_feedback`, `request_catalog_race`, `get_my_requests` |
 | Analyse a GPX course they have | `save_gpx_as_race` (asks whether it is a race or a route) |
