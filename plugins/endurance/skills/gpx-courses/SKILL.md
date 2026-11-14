@@ -1,6 +1,6 @@
 ---
 name: gpx-courses
-description: Use when the athlete wants their own GPX course analysed or saved: a track they found online, a route they exported, or a race whose GPX they have. Covers uploading it to Endurance Analytics with save_gpx_as_race, explaining the terrain result, pending surface data, the race-slot quota, and why deletion happens on the website.
+description: "Use when the athlete wants their own GPX course analysed or saved: a track they found online, a route they exported, or a race whose GPX they have. Covers uploading it to Endurance Analytics with save_gpx_as_race, explaining the terrain result, pending surface data, the race-slot quota, and why deletion happens on the website."
 ---
 
 # Uploading and analysing a GPX course

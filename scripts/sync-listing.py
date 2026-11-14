@@ -53,8 +53,10 @@ def openai_manifest(listing):
 
 
 def claude_manifest(listing):
-    return dump({key: listing[key] for key in (
-        "name", "displayName", "version", "description", "author", "homepage", "repository", "license", "keywords")})
+    manifest = {key: listing[key] for key in (
+        "name", "displayName", "version", "description", "author", "homepage", "repository", "license", "keywords")}
+    manifest["privacyPolicyUrl"] = load(PLUGIN / "plugin.json")["extensions"]["com.openai"]["interface"]["privacyPolicyURL"]
+    return dump(manifest)
 
 
 def marketplace(listing):

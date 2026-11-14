@@ -20,5 +20,6 @@
     "terrain",
     "weather",
     "analytics"
-  ]
+  ],
+  "privacyPolicyUrl": "https://endurance-analytics.com/en/privacy"
 }
