@@ -55,7 +55,11 @@ def openai_manifest(listing):
 def claude_manifest(listing):
     manifest = {key: listing[key] for key in (
         "name", "displayName", "version", "description", "author", "homepage", "repository", "license", "keywords")}
-    manifest["privacyPolicyUrl"] = load(PLUGIN / "plugin.json")["extensions"]["com.openai"]["interface"]["privacyPolicyURL"]
+    iface = load(PLUGIN / "plugin.json")["extensions"]["com.openai"]["interface"]
+    manifest["privacyPolicyUrl"] = iface["privacyPolicyURL"]
+    manifest["termsOfServiceUrl"] = iface["termsOfServiceURL"]
+    manifest["supportUrl"] = iface["supportURL"]
+    manifest["documentationUrl"] = listing["homepage"]
     return dump(manifest)
 
 

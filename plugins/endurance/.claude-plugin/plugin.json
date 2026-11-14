@@ -21,5 +21,8 @@
     "weather",
     "analytics"
   ],
-  "privacyPolicyUrl": "https://endurance-analytics.com/en/privacy"
+  "privacyPolicyUrl": "https://endurance-analytics.com/en/privacy",
+  "termsOfServiceUrl": "https://endurance-analytics.com/en/terms",
+  "supportUrl": "https://endurance-analytics.com/en/contact",
+  "documentationUrl": "https://endurance-analytics.com/en/connect"
 }
